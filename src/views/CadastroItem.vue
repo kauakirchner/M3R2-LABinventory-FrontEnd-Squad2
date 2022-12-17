@@ -206,12 +206,11 @@ export default {
     },
     methods: {
         ...mapMutations(["itens/editItem"]),
-        // Salva no objeto itens no localstorage
         saveItem() {
-            let value = this.item.valor
-            this.item.valor = value.replace(",", ".")
-            this.item.valor = Number(this.item.valor)
-            this.item.emprestado = 'Item disponível'
+            let value = this.item.valor;
+            this.item.valor = value.replace(",", ".");
+            this.item.valor = Number(this.item.valor);
+            this.item.emprestado = 'Item disponível';
             this.$store.dispatch('itens/saveItem', {...this.item})
             .then(() => {
                 if (this.exists) {
@@ -229,7 +228,7 @@ export default {
             });
         },
         cleanForm() {
-            const form = document.getElementById('newitem-form')
+            const form = document.getElementById('newitem-form');
             form.reset();
         },
     },
@@ -237,13 +236,6 @@ export default {
         itemsLocal(){
             return this.$store.state.itens.sendItens;
         },
-        // showConfirmError() {
-        //     if (this.itemsLocal.patrimonio != this.item.patrimonio) {
-        //         return true
-        //     } else {
-        //         return false
-        //     }
-        //     },
         ...mapState({
             exists: (state) => state.itens.exists,
             msgError: (state) => state.itens.errorMsg,

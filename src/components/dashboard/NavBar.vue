@@ -13,9 +13,9 @@
 </div>
 </template>
 <script>
-import { useCookies } from 'vue3-cookies'
+import { useCookies } from 'vue3-cookies';
 
-const cookies = useCookies().cookies
+const cookies = useCookies().cookies;
 
 export default {
     data() {
@@ -28,28 +28,19 @@ export default {
     computed: {
         // Retorna o nome da rota atual
         path() {
-            let pathInfo = this.$router.currentRoute.value.fullPath
-            let currPath = pathInfo.split('/')[2]
-            let splitName = currPath.split('-')
-            let firstName = splitName[0]
-            let secondName = splitName[1]
-            let name1 = `${firstName.charAt(0).toUpperCase() + firstName.slice(1)} de ${secondName}`
-            let name2 = `${firstName.charAt(0).toUpperCase() + firstName.slice(1)}`
-            return splitName.length > 1 ? name1 : name2 
-            // try {
-            //     // Se for children
-                
-            // } catch (e) {
-            //     // Se for nome simples
-            //     let pathInfo = this.$router.currentRoute.value.fullPath
-            //     let currPath = pathInfo.split('/')[1]
-            //     return currPath.charAt(0).toUpperCase() + currPath.slice(1)
-            // }
+            let pathInfo = this.$router.currentRoute.value.fullPath;
+            let currPath = pathInfo.split('/')[2];
+            let splitName = currPath.split('-');
+            let firstName = splitName[0];
+            let secondName = splitName[1];
+            let name1 = `${firstName.charAt(0).toUpperCase() + firstName.slice(1)} de ${secondName}`;
+            let name2 = `${firstName.charAt(0).toUpperCase() + firstName.slice(1)}`;
+            return splitName.length > 1 ? name1 : name2 ;
         },
     },
     mounted() {
-        this.user = cookies.get('logged').email
-        this.userName = cookies.get('logged').name
+        this.user = cookies.get('logged').email;
+        this.userName = cookies.get('logged').name;
     }
 }
 </script>
@@ -60,7 +51,7 @@ export default {
     top: 0;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: rgb(14, 34, 63);
+    background-color: #4B0082;
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;

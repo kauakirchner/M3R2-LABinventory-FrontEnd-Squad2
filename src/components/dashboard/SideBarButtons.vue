@@ -1,5 +1,4 @@
 <template>
-<!-- SIDEBAR BUTTONS -->
   <div class="sb-btns">
     <label>{{ title }}</label>
     <button type="button" class="btn btn-outline-info" @click="method1">
@@ -42,7 +41,6 @@ export default {
 
 </script>
 <style scoped>
-/*Div dos botões no sidebar*/
 .sb-btns {
     display: grid;
     text-align: left;

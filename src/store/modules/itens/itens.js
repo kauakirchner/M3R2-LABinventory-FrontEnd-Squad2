@@ -23,41 +23,41 @@ export default {
         getItem(state, patr) {
             state.sendItens.forEach(item => {
                 if (item.patrimonio == patr) {
-                    state.item = item
+                    state.item = item;
                 }
             })
         },
         editItem(state, patr) {
-            state.toEdit = patr
+            state.toEdit = patr;
         },
         setItens(state, itens){
-            state.itens.push(itens)
+            state.itens.push(itens);
         },
         
         // Calcula estatísticas para SMALL CARDS
         itemStats(state) {
             // Quantidade de itens
-            state.stats.itens = state.sendItens.length
+            state.stats.itens = state.sendItens.length;
             // Valor total dos itens
-            var totalValue = 0
+            let totalValue = 0;
             state.sendItens.forEach((e) => {
-                totalValue = totalValue + e.valor
+                totalValue = totalValue + e.valor;
             })
-            state.stats.total = totalValue
+            state.stats.total = totalValue;
             // Verifica no array de itens quantos estão emprestados
-            let emprestados = 0
+            let emprestados = 0;
             state.sendItens.forEach(item => {
                 if (item.emprestado !== "Item disponível" && item.emprestado !== "") {
                     emprestados++
                 }
             })
-            state.stats.emprestados = emprestados  
+            state.stats.emprestados = emprestados;
         },
         setMsgError(state, msg) {
             state.errorMsg = msg;
           },
         setSendItens(state, itens) {
-            state.sendItens = itens
+            state.sendItens = itens;
         }
     },
     actions: {
@@ -100,9 +100,9 @@ export default {
                   'Authorization': "Bearer" + cookies.get("logged").token,
                   'Access-Control-Allow-Origin': "*"
                 }}).then((response) => {
-                    context.dispatch("getItens")
-                    let toast = require("vue-toast-notification")
-                    toast.useToast().info(response.data.sucesso, {position: 'top-right'})
+                    context.dispatch("getItens");
+                    let toast = require("vue-toast-notification");
+                    toast.useToast().info(response.data.sucesso, {position: 'top-right'});
                 })
         },
         // Deleta um objeto item do array de itens pelo código de patrimônio
@@ -117,13 +117,13 @@ export default {
                 }
             })
             .then(() => {
-                context.dispatch("getItens")
-                return true
+                context.dispatch("getItens");
+                return true;
             })
             .catch((e) => {
-                console.error("error", e)
+                console.error("error", e);
             })
-            return true
+            return true;
         },
         // Insere key "emprestado: colaborador no item"
         flagItem(context, item) {
@@ -133,11 +133,11 @@ export default {
                     'Access-Control-Allow-Origin': "*"
                 }})
                 .then(() => {
-                    context.dispatch("getItens")
-                    return true
+                    context.dispatch("getItens");
+                    return true;
                 })
                 .catch((e) => {
-                    console.error("error", e)
+                    console.error("error", e);
                 })
             
         },
@@ -147,7 +147,7 @@ export default {
                   'Authorization': cookies.get("logged").token,
                 }})
             .then((response) => {
-                context.commit("setSendItens", response.data.records)
+                context.commit("setSendItens", response.data.records);
             })
             .catch(() => {
                 // No caso de qualquer outro erro na requisição
@@ -159,13 +159,13 @@ export default {
         // Retorna o último item selecionado para edição
         // Alimenta o modal Editar Item
         sendItemToEdit(state) {
-            let itemToEdit = {}
+            let itemToEdit = {};
             state.sendItens.forEach(item => {
                 if (item.patrimonio == state.toEdit) {
-                    itemToEdit = item
+                    itemToEdit = item;
                 }
             })
-            return itemToEdit
+            return itemToEdit;
         },
         getItems(state) {
             return state.sendItens;
@@ -175,7 +175,7 @@ export default {
         },
         sendErrorMsg(state) {
             return state.errorMsg;
-          },
+        },
     }
 }
     

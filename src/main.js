@@ -14,4 +14,4 @@ app.use(VueLoading);
 app.use(store);
 app.use(router);
 app.use(VueToast);
-app.mount('#app')
+app.mount('#app');

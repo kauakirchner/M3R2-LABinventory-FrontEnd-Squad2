@@ -20,7 +20,6 @@ i {
   color: rgb(7, 201, 239);
 }
 
-/* Centraliza o icone */
 .center-icon{
     display: flex;
     justify-content: center;
@@ -28,7 +27,6 @@ i {
     margin-bottom: 10px;
 }
 
-/* Configura o icone */
 .onlyIcon {
   display: flex;
   justify-content: center;
@@ -41,7 +39,6 @@ i {
   cursor: pointer;
 }
 
-/* Muda o icone quando passa o mouse por cima */
 .onlyIcon:hover {
   background-color: rgb(7, 201, 239);
 }

@@ -18,7 +18,6 @@
             </button>
           </div>
           <div class="modal-body">
-          <!-- FORM with fields NOME, EMAIL, SENHA -->
             <newuser-form 
             id="registerform" 
             :validation-schema="schema" 
@@ -82,7 +81,6 @@
                 </div>
             </newuser-form>
           </div>
-          <!-- BUTTONS -->
           <div class="modal-footer">
             <button 
             type="button" 
@@ -106,117 +104,103 @@
   </div>
 </template>
 <script>
-import { Form, Field } from 'vee-validate'
-import rules from '../validations/validateusers'
-import { mapActions, mapState } from 'vuex'
-
-rules
+import { Form, Field } from 'vee-validate';
+import rules from '../validations/validateusers';
+import { mapActions, mapState } from 'vuex';
+rules;
   
-  export default {
-      components: {
-      "newuser-form": Form,
-      "newuser-field": Field,
+export default {
+  components: {
+  "newuser-form": Form,
+  "newuser-field": Field,
+  },
+  data() {
+    return {
+      schema: {
+        name: 'required',
+        email: 'required|emailcheck',
+        password: 'required|password',
+      
       },
-      data() {
-          return {
-  
-              schema: {
-                name: 'required',
-                email: 'required|emailcheck',
-                password: 'required|password',
-              
-              },
-              user: {}, // Recebe os inputs
-              confirmPassword: '',
-              confirmError: 'As senhas devem ser iguais.'
-          }
-      },
-      computed: {
-        ...mapState({
-          success: (state) => state.users.success
-        }),
-        showError() {
-          if (this.user.password) {
-            let show = this.user.password.length
-            // 
-            if (show > 0 && show < 8) {
-              return true
-            }
-          }
-          return false
-        },
-        cpwLength() {
-          return this.confirmPassword.length
-        },
-        pwLength() {
-          if (this.user.password) {
-            return this.user.password.length
-          } else {
-            return false
-          }
-        },
-        userPw() {
-          if (this.user.password) {
-            return this.user.password
-          } else {
-            return false
-          }
-        },
-        userCPw() {
-          return this.confirmPassword
-        },
-        
-        // eslint-disable-next-line vue/return-in-computed-property
-        disable() {
-          if (this.cpwLength >= 8 && this.userCPw === this.userPw) {
-            return false
-          }
-          else {
-            return true
-          }
-        },
-        showConfirmError() {
-          if (this.userPw) {
-            if (this.cpwLength >= this.pwLength && this.userCPw !== this.userPw) {
-              return true
-            } else {
-              return false
-            }
-          } else {
-            return false
-          }
-        }
-      },
-      methods: {
-        ...mapActions(["users/setAccount"]),
-        // Cria nova conta
-        setUserAccount() {
-          // Envia novo usuário para store
-          this['users/setAccount']({...this.user})
-          .then(() => {
-            if(this.success) {
-              this.$toast.info('Conta criada com sucesso!', {position: 'top-right'})
-            } else {
-              this.$toast.warning('E-mail já cadastrado.', {position: 'top-right'})
-            }
-          })
-          .catch((e) => {
-            console.log("erro", e)
-          }).finally(() => {
-            let form = document.getElementById('registerform')
-            this.confirmPassword = ''
-            form.reset()
-          })
-        },
-        cleanForm() {
-          let form = document.getElementById('registerform')
-          this.confirmPassword = ''
-          form.reset()
+      user: {},
+      confirmPassword: '',
+      confirmError: 'As senhas devem ser iguais.'
+    }
+  },
+  computed: {
+    ...mapState({
+      success: (state) => state.users.success
+    }),
+    showError() {
+      if (this.user.password) {
+        const show = this.user.password.length;
+        if (show > 0 && show < 8) {
+          return true;
         }
       }
-      
-  }
+      return false;
+    },
+    cpwLength() {
+      return this.confirmPassword.length;
+    },
+    pwLength() {
+      if (this.user.password) {
+        return this.user.password.length;
+      } 
+      return false;
+    },
+    userPw() {
+      if (this.user.password) {
+        return this.user.password;
+      } 
+      return false;
+    },
+    userCPw() {
+      return this.confirmPassword;
+    },
+    
+    disable() {
+      if (this.cpwLength >= 8 && this.userCPw === this.userPw) {
+        return false;
+      }
+      return true;
+    },
 
+    showConfirmError() {
+      if (this.userPw) {
+        if (this.cpwLength >= this.pwLength && this.userCPw !== this.userPw) {
+          return true;
+        }  
+        return false;
+      } 
+      return false;
+      
+    }
+  },
+  methods: {
+    ...mapActions(["users/setAccount"]),
+    setUserAccount() {
+      this['users/setAccount']({...this.user})
+      .then(() => {
+        if(this.success) {
+          this.$toast.info('Conta criada com sucesso!', {position: 'top-right'});
+          return true; 
+        }
+        this.$toast.warning('E-mail já cadastrado.', {position: 'top-right'})
+      })
+      .catch(() => {
+      })
+      .finally(() => {
+        this.cleanForm();
+      })
+    },
+    cleanForm() {
+      let form = document.getElementById('registerform');
+      this.confirmPassword = '';
+      form.reset();
+    }
+  }
+}
 </script>
 <style scoped>
   

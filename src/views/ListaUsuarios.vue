@@ -1,7 +1,6 @@
 <template>
 
 <div class="container p-4">
-    <!-- Barra de busca -->
     <div id="listcollab-header">
         <label 
         id="collab-search-title" 
@@ -15,10 +14,8 @@
         v-model="barraPesquisa" 
         @input="setCollabs">
     </div>
-    <!-- CARDS de colaboradores -->
     <div id="collab-cards">
         <div  class="cards shadow" v-for="collab in collabs" :key="collab._id.$oid">
-            <!-- Componente CARD tamanho médio -->
             <MediumCard
             cardType="user-list" 
             :img="collab.email" 
@@ -35,14 +32,12 @@
 </template>
 <script>
 
-import ModalColaboradores from './ModalColaboradores.vue'
-import MediumCard from '@/components/MediumCard.vue'
-import { mapActions } from 'vuex'
+import ModalColaboradores from './ModalColaboradores.vue';
+import MediumCard from '@/components/MediumCard.vue';
+import { mapActions } from 'vuex';
 
 export default {
-
     components: {
-
         ModalColaboradores,
         MediumCard
     },
@@ -55,20 +50,15 @@ export default {
     },
     watch: {
         allCollabs() {
-            this.collabs = this.allCollabs
+            this.collabs = this.allCollabs;
         }
     },
     methods: {
         ...mapActions(["collaborators/getCollabs"]),
-        // Chamado pelos CARDS, que trazem o item
-        // Para setar na store o id do colaborador a ser editado
         collabDetails(item) {
-            // Retorna o id de uma seleção de colaborador anterior a atual
-            let id = Object.values(item._id)[0]
-            this.$store.commit('collaborators/setSelectedId', id)
-            //let oldValue = this.$store.getters['collaborators/sendSelectedId']
+            const id = Object.values(item._id)[0];
+            this.$store.commit('collaborators/setSelectedId', id);
         },
-        // Recebe o input da barra de busca de colaborador
         setCollabs() {
             if(this.barraPesquisa !== '') {
                 let pesquisa = () => {
@@ -79,7 +69,7 @@ export default {
                 } 
                 if(pesquisa) {
                 this.collabs = pesquisa(this.barraPesquisa);
-                let count = 0
+                let count = 0;
                 if(this.collabs.length === 0) {
                     count++
                     if (count > 0) {
@@ -96,18 +86,15 @@ export default {
         }
     },
     computed: {
-        // Retorna a lista atual de colaboradores
         allCollabs() {
-            return this.$store.state.collaborators.collabs
+            return this.$store.state.collaborators.collabs;
         },
     },
     mounted() {
-         // Popula a lista de colaboradores na store (state.collabs)
-         this['collaborators/getCollabs']()
-         .then(() => {
-            this.collabs = this.allCollabs
-            })
-        
+        this['collaborators/getCollabs']()
+        .then(() => {
+            this.collabs = this.allCollabs;
+        })
     }
 }
 </script>

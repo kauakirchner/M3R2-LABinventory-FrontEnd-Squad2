@@ -32,16 +32,16 @@ export default {
             "token": response.data.token,
           });
           cookies.set("logged", {
-                  "name": response.data.name,
-                  "email": response.data.email,
-                  "token": response.data.token,
-                  "status": true,
-                });
+              "name": response.data.name,
+              "email": response.data.email,
+              "token": response.data.token,
+              "status": true,
+          });
             
         }
       })
       .catch((e) => {
-        console.error(e)
+        console.error(e);
         context.commit("setMsgError", e.response.data.error);
       })
     },
@@ -55,7 +55,7 @@ export default {
   },
   mutations: {
     setURL(state, url) {
-      state.url_auth = url
+      state.url_auth = url;
     },
     setMsgError(state, msg) {
       state.errorMsg = msg;
