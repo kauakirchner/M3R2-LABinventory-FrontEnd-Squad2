@@ -4,8 +4,8 @@ export default {
     state() {
         return {
           
-            sidebarWidth: 300,
-            toggleSideBar: true // Controlador hide/show SideBar
+            sidebarWidth: 70,
+            toggleSideBar: false // Controlador hide/show SideBar
         }
     },
     mutations: {

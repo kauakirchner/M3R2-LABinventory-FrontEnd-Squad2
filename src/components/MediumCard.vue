@@ -30,7 +30,6 @@
 </template>
 <script>
 export default {
-    // Propiedades a serem passadas nas views
     props: {
         img: {
             type: String
@@ -54,12 +53,10 @@ export default {
 }
 </script>
 <style scoped>
-/* Imagem dos CARDS type=inventory */
 img {
 max-width: 150px;
 max-height: 100px;
 }
-/* span abaixo da img ou gravatar */
 .first {
     display: -webkit-box;
     overflow: hidden;
@@ -67,7 +64,6 @@ max-height: 100px;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
-/* Container geral do CARD */
 label {
     display: flex;
     justify-content: center;
@@ -79,7 +75,6 @@ label {
     padding: 20px;
     text-align: center;
 }
-/* <p></p> base do CARD */
 .fourth {
     
     font-weight: bold;

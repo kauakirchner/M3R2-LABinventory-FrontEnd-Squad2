@@ -90,7 +90,6 @@
                   </span>
                 </div>
               </div>
-              <!-- Terceira linha: DATA NASCIMENTO e CARGO -->
               <div class="row">
                 <div class="col-6">
                   <label class="form-label">Data de nascimento</label>
@@ -130,7 +129,6 @@
               </div>
 
               <h5 class="mt-3">Dados de endereço</h5>
-              <!-- Quarta linha: CEP, CIDADE, ESTADO -->
               <div class="row mb-1">
                 <div class="col-4">
                   <label class="form-label">CEP</label>
@@ -173,7 +171,6 @@
                   />
                 </div>
               </div>
-              <!-- Quinta linha: LOGRADOURO e NÚMERO -->
               <div class="row mb-1">
                 <div class="col-9">
                   <label class="form-label">Logradouro</label>
@@ -202,7 +199,6 @@
                   </span>
                 </div>
               </div>
-              <!-- Sexta linha: COMPLEMENTO e BAIRRO -->
               <div class="row mb-1">
                 <div class="col-6">
                   <label class="form-label">Complemento</label>
@@ -230,7 +226,6 @@
                   />
                 </div>
               </div>
-              <!-- Sétima linha: PONTO DE REFERêNCIA -->
               <div class="row">
                 <div class="col-12">
                   <label class="form-label">Ponto de referência</label>
@@ -250,7 +245,6 @@
               </div>
             </collab-form>
           </div>
-          <!-- Botões SAIR e SALVAR -->
           <div class="modal-footer">
             <button
               type="button"
@@ -304,13 +298,11 @@ export default {
         job: "required",
         cep: "required",
       },
-      collab: {}, // Dados do colaborador a ser editado, os dados irão popular os inputs
-      cepNum: null, // Recebe o CEP o do claborador a ser editado, popula o input
+      collab: {},
+      cepNum: null, 
     };
   },
   watch: {
-    // Quando o modal para edição de colaboradores é chamado
-    // esta computada é alterada com o id do colaborador
     async getSelectedId(newId) {
       await this.$store
         .dispatch("collaborators/getOneCollab", newId)
@@ -328,44 +320,40 @@ export default {
   methods: {
     ...mapMutations(["collaborators/setEditUser"]),
     ...mapActions(["collaborators/saveCollab", "collaborators/DelCollab"]),
-    // Quando o input de CEP tiver mais que 7 caracteres
-    // Envia o CEP para store
+
     getCepInfo() {
       this.$store.dispatch("collaborators/cepInfo", this.cepNum).then(() => {
-        this.collab.localidade = this.cepInfo.localidade
-        this.collab.uf = this.cepInfo.uf
-        this.collab.logradouro = this.cepInfo.logradouro
-        this.collab.bairro = this.cepInfo.bairro
-
+        this.collab.localidade = this.cepInfo.localidade;
+        this.collab.uf = this.cepInfo.uf;
+        this.collab.logradouro = this.cepInfo.logradouro;
+        this.collab.bairro = this.cepInfo.bairro;
       })
     },
-    // Envia o objeto com os dados do colaborador para a store
-    saveCollab() {
-      // Ativando modo edição
-      this["collaborators/setEditUser"](true);
-      this.collab._id = Object.values(this.collab._id)[0]
-      // Chamando Action saveCollab com flag de edição ativa
-      this["collaborators/saveCollab"]({ ...this.collab }).then(() => {
-        let btn = document.getElementById("btnclose");
-        btn.click();
-        //this.cleanForm();
-      });
 
+    saveCollab() {
+      this["collaborators/setEditUser"](true);
+      this.collab._id = Object.values(this.collab._id)[0];
+      this["collaborators/saveCollab"]({ ...this.collab })
+      .then(() => {
+        const btn = document.getElementById("btnclose");
+        btn.click();
+      });
       this.$toast.info("Colaborador Atualizado com sucesso!", {
         position: "top",
       });
     },
+
     delCollab() {
-      let idCollab = this.$store.getters["collaborators/sendSelectedId"];
+      const idCollab = this.$store.getters["collaborators/sendSelectedId"];
       this["collaborators/DelCollab"](idCollab).then(() => {
         this.$toast.info("Colaborador Excluido com sucesso!", {
           position: "top",
         });
       });
-      //location.reload();
     },
+
     cleanForm() {
-      let form = document.getElementById("collab-form");
+      const form = document.getElementById("collab-form");
       form.reset();
       this.collab = {};
       this.cepNum = null;
@@ -376,11 +364,9 @@ export default {
       editUser: (state) => state.collaborators.editUser,
       cepInfo: (state) => state.collaborators.cepInfo
     }),
-    // Retorna as mensagens de erro para o input de CEP
     errorMsg() {
       return this.$store.getters["collaborators/sendErrorMsg"];
     },
-    // Retorna id do colaborador selecionado para edição em ListaUsuarios.vue
     getSelectedId() {
       return this.$store.getters["collaborators/sendSelectedId"];
     },

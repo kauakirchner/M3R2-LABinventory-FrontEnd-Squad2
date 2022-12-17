@@ -301,7 +301,6 @@ export default {
         };
       });
     },
-    // Salva o colaborador na lista no json server
     saveCollab() {
       let collabData = {
         collab: this.collab,
@@ -318,7 +317,7 @@ export default {
             });
             this.isLoading = true;
             setTimeout(() => {
-              this.$router.push("/users/colaboradores")
+              this.$router.push("/users/colaboradores");
               this.cleanForm();
             }, 3000)
           }
@@ -341,24 +340,20 @@ export default {
   },
   computed: {
     ...mapState({
-      cepInfo: (state) => state.collaborators.cepInfo,
-      exists: (state) => state.collaborators.exists,
-      msgError: (state) => state.collaborators.errorMsg,
-    }),
+        cepInfo: (state) => state.collaborators.cepInfo,
+        exists: (state) => state.collaborators.exists,
+        msgError: (state) => state.collaborators.errorMsg,
+      }),
     // Retorna Msg erro de CEP
     cepError() {
       return this.$store.getters["collaborators/errorCep"];
     },
     isEmptyFields() {
-      let checkSize = Object.keys(this.collab).length + Object.keys(this.address).length
-      if(checkSize < 12) {
-        return true
-      } else {
-        return false
-      }
+      let checkSize = Object.keys(this.collab).length + Object.keys(this.address).length;
+      return Boolean(checkSize < 12);
     }
   }
-};
+}
 </script>
 <style scoped>
 .loading-container {

@@ -98,14 +98,14 @@
     <ModalNewAccount></ModalNewAccount>
 </template>
 <script>
-import { Form, Field } from 'vee-validate'
-import rules from '../validations/validateusers'
-import { useCookies } from 'vue3-cookies'
-import ModalNewAccount from './ModalNewAccount.vue'
-import { mapActions, mapState } from 'vuex'
+import { Form, Field } from 'vee-validate';
+import rules from '../validations/validateusers';
+import { useCookies } from 'vue3-cookies';
+import ModalNewAccount from './ModalNewAccount.vue';
+import { mapActions, mapState } from 'vuex';
 
-const cookies = useCookies().cookies
-rules
+const cookies = useCookies().cookies;
+rules;
 
 export default {
     data() {
@@ -130,21 +130,21 @@ export default {
                 "password": this.user.password
             }).then(() => {
                 if(this.success) {
-                    this.$toast.info(`Bem-vindo(a), ${this.userLogged.name}!`, {position: 'top-right'})
-                    this.$router.push('/users/inventario')
-                } else {
-                    this.$toast.error(this.errorMsg)
-                }
+                    this.$toast.info(`Bem-vindo(a), ${this.userLogged.name}!`, {position: 'top-right'});
+                    this.$router.push('/users/inventario');
+                    return true;
+                } 
+                this.$toast.error(this.errorMsg);
             })
         },
         enterWithGoogle() {
             this["auth/getUrlAuth"]().then(() => {
-                location.href = this.url_auth
+                location.href = this.url_auth;
             })
         },
         cleanForm() {
-            let form = document.getElementById('loginform')
-            form.reset()
+            const form = document.getElementById('loginform');
+            form.reset();
         },
         inProgress() {
             this.$toast.info(`Pedimos desculpas...a funcionalidade "Esqueceu senha?" está em construção.`, {position: 'top-left'});
@@ -158,41 +158,28 @@ export default {
             url_auth: (state) => state.auth.url_auth,
         }),
         showMailError() {
-            // Torna a visualização da mensagem de erro responsiva
             if (this.user.email) {
                 if (this.user.email.length > 0) {
-                    return false
+                    return false;
                 }
             }
-            return true
+            return true;
         },
         showPassError() {
-            // Torna a visualização da  mensagem de erro responsiva
             if (this.user.password) {
                 if (this.user.password.length > 0) {
-                    return false
+                    return false;
                 }
             }
-            return true
+            return true;
         }, 
     },
     mounted() {
-        // // Cria listas de users e itens vazias no localstorage, caso não existam
-        // if (localStorage.getItem('users') === null) {
-        //     let users = []
-        //     localStorage.setItem('users', JSON.stringify(users))
-        // }
-        // if (localStorage.getItem('itens') === null) {
-        //     let itens = []
-        //     localStorage.setItem('itens', JSON.stringify(itens))
-        // }
-        // Se usuário já estiver logado, envia para o inventário
         if (cookies.get('logged') !== null) {
             if (cookies.get('logged').status === true) {
-                this.$router.push('/users/inventario')
+                this.$router.push('/users/inventario');
             }
         }
-        
     }
 }
 </script>

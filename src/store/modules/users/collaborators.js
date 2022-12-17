@@ -58,7 +58,7 @@ export default {
     async getCollabs(context) {
       let headers = { 
         headers: {
-            'Authorization': "Bearer" + cookies.get("logged").token,
+            'Authorization': `Bearer ${cookies.get("logged").token}`,
             'Access-Control-Allow-Origin': "http://localhost:5000/collabs/",
             'Access-Control-Allow-Methods': 'GET',
             'Access-Control-Allow-Headers': '*',
