@@ -27,8 +27,6 @@ export default {
         }
     },
     actions: {
-        // Cria uma nova conta de usuário
-        // Parâmetro user é enviado pelo modal de criação de conta
         async setAccount(context, user) {
             context.commit('setSuccess', false);
             const headers = {
