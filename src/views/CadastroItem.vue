@@ -153,14 +153,14 @@
                 </div>
                 <div class="modal-footer">
                     <button 
-                    class="btn btn-outline-info" 
+                    class="btn btn-warning" 
                     type="button" 
                     @click="cleanForm">
                     Limpar
                     </button>
                     <button 
                     type="submit" 
-                    class="btn btn-info">
+                    class="btn btn-primary">
                     Salvar
                     </button>
                 </div>
@@ -170,12 +170,12 @@
 </template>
 <script>
 
-import { Form, Field } from 'vee-validate'
-import rules from '../validations/validateitens'
-import {mapMutations, mapState} from 'vuex'
-import { mask } from 'vue-the-mask'
+import { Form, Field } from 'vee-validate';
+import rules from '../validations/validateitens';
+import {mapMutations, mapState} from 'vuex';
+import { mask } from 'vue-the-mask';
 
-rules
+rules;
 
 export default {
 
@@ -198,15 +198,15 @@ export default {
                 modelo: 'required',
                 descricao: 'required'
             },
-            item: {}, // Recebe os inputs
-            disabled: true, // Inputs desabilitados
+            item: {},
+            disabled: true, 
             isLoading: false,
-            // confirmError: 'Código de patrimônio já existe',
         }
     },
     methods: {
         ...mapMutations(["itens/editItem"]),
         saveItem() {
+            alert("teste")
             let value = this.item.valor;
             this.item.valor = value.replace(",", ".");
             this.item.valor = Number(this.item.valor);
@@ -275,39 +275,32 @@ export default {
     transform: rotate(359deg);
   }
 }
-/* TÍTULO */
 p {
     font-size: 1.8em;
     margin-bottom: 40px;
 }
-/* Span ao lado do SWITCH */
 #switch-editar {
     margin: 6px;
 }
-/* Form LABELS */
 .form-label {
     margin-bottom: 2px;
     font-size: 1em;
 }
-/* TÍTULO E SWITCH div */
 .header {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
 }
-/* Div GERAL */
 .cadastroItem {
     padding: 50px;
     min-height: 100%;
 }
-/* FORM div */
-.container
- {
-     text-align: left;
-     background-color: aliceblue;
-     padding: 30px;
- }
-/* SWITCH */
+.container {
+    text-align: left;
+    padding: 30px;
+    background-color: #2196f3;
+    border-radius: 5px;
+}
  .switch {
   position: relative;
   display: inline-block;
@@ -352,7 +345,6 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }

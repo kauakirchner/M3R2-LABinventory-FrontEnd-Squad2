@@ -84,14 +84,14 @@
           <div class="modal-footer">
             <button 
             type="button" 
-            class="btn btn-outline-info" 
+            class="btn btn-danger" 
             data-bs-dismiss="modal"
             @click="cleanForm">
             Sair
             </button>
             <button 
             type="button" 
-            class="btn btn-info" 
+            class="btn btn-primary" 
             data-bs-dismiss="modal"
             :disabled="disable"
             @click="setUserAccount()">

@@ -225,13 +225,13 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-info" type="button" @click="cleanForm">
+          <button class="btn btn-warning" type="button" @click="cleanForm">
             Limpar
           </button>
           <button
             @click.prevent="saveCollab"
             type="submit"
-            class="btn btn-info"
+            class="btn btn-primary"
             :disabled="isEmptyFields">
             Salvar
           </button>
@@ -381,41 +381,35 @@ export default {
     transform: rotate(359deg);
   }
 }
-/* Título e SWITCH editar */
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-/* Span ao lado do SWITCH */
 #switch-editar {
   margin: 6px;
 }
-/* Título */
 p {
   font-size: 1.8em;
 }
-/* SUB-TÍTULOS */
 h5 {
   margin-bottom: 15px;
   font-weight: 500;
 }
-/* DIV GERAL */
 .cadastroUsuario {
   padding: 50px;
   min-height: 100%;
 }
-/* DIV FORM */
 .container {
   text-align: left;
   padding: 30px;
+  background-color: #2196f3;
+  border-radius: 5px;
 }
-/* labels FORM */
 .form-label {
   margin-bottom: 2px;
   font-size: 1em;
 }
-/* SWITCH */
 .switch {
   position: relative;
   display: inline-block;
@@ -460,7 +454,6 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }

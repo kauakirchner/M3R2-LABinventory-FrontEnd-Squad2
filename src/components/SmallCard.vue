@@ -28,7 +28,7 @@ export default {
 <style scoped>
 
 label {
-    background-color: rgb(187, 218, 245);
+    background-color: #2196f3;
     display: flex;
     justify-content: center;
     align-items: center;

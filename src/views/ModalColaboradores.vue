@@ -248,7 +248,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-outline-danger"
+              class="btn btn-danger"
               data-bs-dismiss="modal"
               @click="delCollab"
             >
@@ -256,13 +256,13 @@
             </button>
             <button
               type="button"
-              class="btn btn-outline-info"
+              class="btn btn-info"
               data-bs-dismiss="modal"
               @click="cleanForm"
             >
               Sair
             </button>
-            <button type="button" class="btn btn-info" @click="saveCollab">
+            <button type="button" class="btn btn-primary" @click="saveCollab">
               Salvar
             </button>
           </div>
