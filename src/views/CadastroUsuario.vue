@@ -225,13 +225,13 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-info" type="button" @click="cleanForm">
+          <button class="btn btn-warning" type="button" @click="cleanForm">
             Limpar
           </button>
           <button
             @click.prevent="saveCollab"
             type="submit"
-            class="btn btn-info"
+            class="btn btn-primary"
             :disabled="isEmptyFields">
             Salvar
           </button>
@@ -301,7 +301,6 @@ export default {
         };
       });
     },
-    // Salva o colaborador na lista no json server
     saveCollab() {
       let collabData = {
         collab: this.collab,
@@ -318,7 +317,7 @@ export default {
             });
             this.isLoading = true;
             setTimeout(() => {
-              this.$router.push("/users/colaboradores")
+              this.$router.push("/users/colaboradores");
               this.cleanForm();
             }, 3000)
           }
@@ -341,24 +340,20 @@ export default {
   },
   computed: {
     ...mapState({
-      cepInfo: (state) => state.collaborators.cepInfo,
-      exists: (state) => state.collaborators.exists,
-      msgError: (state) => state.collaborators.errorMsg,
-    }),
+        cepInfo: (state) => state.collaborators.cepInfo,
+        exists: (state) => state.collaborators.exists,
+        msgError: (state) => state.collaborators.errorMsg,
+      }),
     // Retorna Msg erro de CEP
     cepError() {
       return this.$store.getters["collaborators/errorCep"];
     },
     isEmptyFields() {
-      let checkSize = Object.keys(this.collab).length + Object.keys(this.address).length
-      if(checkSize < 12) {
-        return true
-      } else {
-        return false
-      }
+      let checkSize = Object.keys(this.collab).length + Object.keys(this.address).length;
+      return Boolean(checkSize < 12);
     }
   }
-};
+}
 </script>
 <style scoped>
 .loading-container {
@@ -386,41 +381,35 @@ export default {
     transform: rotate(359deg);
   }
 }
-/* Título e SWITCH editar */
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-/* Span ao lado do SWITCH */
 #switch-editar {
   margin: 6px;
 }
-/* Título */
 p {
   font-size: 1.8em;
 }
-/* SUB-TÍTULOS */
 h5 {
   margin-bottom: 15px;
   font-weight: 500;
 }
-/* DIV GERAL */
 .cadastroUsuario {
   padding: 50px;
   min-height: 100%;
 }
-/* DIV FORM */
 .container {
   text-align: left;
   padding: 30px;
+  background-color: #2196f3;
+  border-radius: 5px;
 }
-/* labels FORM */
 .form-label {
   margin-bottom: 2px;
   font-size: 1em;
 }
-/* SWITCH */
 .switch {
   position: relative;
   display: inline-block;
@@ -465,7 +454,6 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(26px);
 }
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }

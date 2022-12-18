@@ -10,7 +10,6 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <!-- TÍTULO -->
             <h3 class="modal-title" id="exampleModalLabel">Editar item</h3>
             <button
               type="button"
@@ -25,7 +24,6 @@
               :validation-schema="schema"
               v-slot="{ errors }"
             >
-              <!-- Primeira linha: CÓD. PATRIMÔNIO e TÍTULO  -->
               <div class="row mb-3">
                 <div class="col-4">
                   <label class="form-label">Patrimônio</label>
@@ -59,7 +57,6 @@
                   </span>
                 </div>
               </div>
-              <!-- Segunda linha: CATEGORIA e VALOR do item-->
               <div class="row mb-3">
                 <div class="col-9">
                   <label class="form-label">Categoria</label>
@@ -96,7 +93,6 @@
                   </span>
                 </div>
               </div>
-              <!-- Terceira linha: URL da imagem do item -->
               <div class="row mb-3">
                 <div class="col-12">
                   <label class="form-label">URL da imagem do item</label>
@@ -114,7 +110,6 @@
                   </span>
                 </div>
               </div>
-              <!-- Quarta linha: MARCA e MODELO do item -->
               <div class="row mb-3">
                 <div class="col-6">
                   <label class="form-label">Marca</label>
@@ -146,7 +141,6 @@
                   </span>
                 </div>
               </div>
-              <!-- Quarta linha: DESCRIÇÃO do item -->
               <div class="row mb-3">
                 <div class="col-12">
                   <label class="form-label">Descrição</label>
@@ -160,11 +154,10 @@
               </div>
             </editItem-form>
           </div>
-          <!-- Botões SAIR DELETAR SALVAR -->
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-outline-danger"
+              class="btn btn-danger"
               data-bs-dismiss="modal"
               @click="delItem"
             >
@@ -172,14 +165,14 @@
             </button>
             <button
               type="button"
-              class="btn btn-outline-info"
+              class="btn btn-info"
               data-bs-dismiss="modal"
             >
               Sair
             </button>
             <button
               type="button"
-              class="btn btn-info"
+              class="btn btn-primary"
               data-bs-dismiss="modal"
               @click="saveItem"
             >
@@ -195,9 +188,8 @@
 <script>
 import { Form, Field } from "vee-validate";
 import rules from "../validations/validateitens";
-// import { mapState } from "vuex";
-
 rules;
+
 export default {
   components: {
     "editItem-form": Form,
@@ -214,19 +206,14 @@ export default {
         marca: "required",
         modelo: "required",
       },
-      item: {}, // Populado pelo watch primeiro e depois pelos inputs
+      item: {}, 
     };
   },
   methods: {
-    // formatMoneyValue(value) {
-    //   return value.replace(".", ".");
-    // },
-    // Salva as edições no item
     saveItem() {
-      // Envia as edições para store
-      let value = this.item.valor
-      this.item.valor = value.replace(",", ".")
-      this.item.valor = Number(this.item.valor)
+      const value = this.item.valor;
+      this.item.valor = value.replace(",", ".");
+      this.item.valor = Number(this.item.valor);
       this.$store.dispatch("itens/saveItemedit", {
         _id: this.item._id,
         patrimonio: this.item.patrimonio,
@@ -239,19 +226,15 @@ export default {
         descricao: this.item.descricao,
         emprestado: this.item.emprestado,
       });
-      let form = document.getElementById("editItem-form");
+      const form = document.getElementById("editItem-form");
       form.reset();
     },
-    // Envia o código de patrimônio do item
-    // a ser deletado para a store de itens
     delItem() {
       this.$store.dispatch("itens/delItem", this.item.patrimonio);
     },
   },
   watch: {
-    // Popula this.item com os dados do item selecionado para edição
     edit(novoItem) {
-      // console.log(Object.values(novoItem._id))
       this.item = {
         _id: Object.values(novoItem._id)[0],
         patrimonio: novoItem.patrimonio,
@@ -267,11 +250,6 @@ export default {
     },
   },
   computed: {
-    // ...mapState({
-    //   edit: (state) => state.itens.edit,
-    // }),
-    // Computada quando um novo item é selecionado
-    // em EmprestaItem.vue ou Inventory.vue
     edit() {
       return this.$store.getters["itens/sendItemToEdit"];
     },

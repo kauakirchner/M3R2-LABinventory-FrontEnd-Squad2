@@ -1,48 +1,45 @@
 describe("Teste listagem colaboradores", () => {
-    const email = "mcoelho@email.com"
-    const password = "@abc1234"
+    const email = "mcoelho@email.com";
+    const password = "@abc1234";
 
     before(() => {
         cy.visit("/")
-        cy.get('#loginform > :nth-child(1) > .form-control').type(email)
-        cy.get('#loginform > :nth-child(2) > .form-control').type(`${password}{enter}`)
+        cy.get('#loginform > :nth-child(1) > .form-control').type(email);
+        cy.get('#loginform > :nth-child(2) > .form-control').type(`${password}{enter}`);
     })
 
     afterEach(() => {
-        cy.get('.btns-div > :nth-child(1) > :nth-child(3)').click()
+        cy.get('.btns-div > :nth-child(1) > :nth-child(3)').click();
     })
 
     it("Acessa a página inicial e lista os colaboradores", () => {
-        const nomeCompleto = "Deputado Tiririca";
-        const dataNascimento = "1965-05-01";
-        const telefone = "48999998877";
-        const emailColaborador = "tiririca@email.com";
-        const cep = "62500001";
-        const numeroDaCasa = "10";
-        const complemento = "jumento";
-        const pontoDeReferencia = "pé de cajueiro"; 
+        const fullName = "Kauã Kirchner de Souza";
+        const birthDate = "2005-01-07";
+        const phone = "48984995578";
+        const email= "kauakirchner@email.com";
+        const cep = "88010-400";
+        const houseNumber = "96";
+        const complement = "anyway";
+        const referencePoint = "Árvores";
         
-        // Cadastra o colaborador
-        cy.get('.btns-div > :nth-child(2) > :nth-child(2)').click()
-        cy.get('.slider').click()
-        cy.get(":nth-child(1) > .col-6 > .form-control").type(nomeCompleto)
-        cy.get(":nth-child(2) > .form-select").select("Masculino")
-        cy.get(":nth-child(1) > :nth-child(3) > .form-control").type(dataNascimento)
-        cy.get(":nth-child(2) > :nth-child(1) > .form-control").type(telefone)
-        cy.get(":nth-child(2) > :nth-child(2) > .form-control").type(emailColaborador)
-        cy.get(":nth-child(3) > .form-select").select("DevOps")
+        cy.get('.btns-div > :nth-child(2) > :nth-child(2)').click();
+        cy.get('.slider').click();
+        cy.get(":nth-child(1) > .col-6 > .form-control").type(fullName);
+        cy.get(":nth-child(2) > .form-select").select("Masculino");
+        cy.get(":nth-child(1) > :nth-child(3) > .form-control").type(birthDate);
+        cy.get(":nth-child(2) > :nth-child(1) > .form-control").type(phone);
+        cy.get(":nth-child(2) > :nth-child(2) > .form-control").type(email);
+        cy.get(":nth-child(3) > .form-select").select("DevOps");
         cy.get(':nth-child(5) > .col-4 > .form-control').type(cep)
-        cy.get(':nth-child(6) > .col-2 > .form-control').type(numeroDaCasa)
-        cy.get(':nth-child(7) > :nth-child(1) > .form-control').type(complemento)
-        cy.get(":nth-child(7) > :nth-child(3) > .form-control").type(pontoDeReferencia)
-        cy.get(".btn-info").click()
+        cy.get(':nth-child(6) > .col-2 > .form-control').type(houseNumber);
+        cy.get(':nth-child(7) > :nth-child(1) > .form-control').type(complement);
+        cy.get(":nth-child(7) > :nth-child(3) > .form-control").type(referencePoint);
+        cy.get(".btn-info").click();
 
-        // Lista todos os colaboradores
-        cy.get('.btns-div > :nth-child(2) > :nth-child(3)').click()
-        cy.contains('.first', "Deputado Tiririca")
+        cy.get('.btns-div > :nth-child(2) > :nth-child(3)').click();
+        cy.contains('.first', "Deputado Tiririca");
 
-        // Faz busca por colaborador especifico
-        cy.get('#search-user').type("Tiririca", {force: true})
-        cy.contains('.first', "Deputado Tiririca")
+        cy.get('#search-user').type("Tiririca", {force: true});
+        cy.contains('.first', "Deputado Tiririca");
     })
 })

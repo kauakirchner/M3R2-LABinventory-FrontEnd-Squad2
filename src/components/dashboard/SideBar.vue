@@ -7,6 +7,7 @@
         id="logo"
         src="../../assets/InventaryLogonobg.png"
         alt="DevInventary Logo"
+        v-show="toggleSideBar"
       />
     </div>
 
@@ -16,46 +17,46 @@
         title="Geral"
         icon1="fa-solid fa-chart-simple"
         btn1="Inventário"
-        :method1="inventario"
+        :method1="inventory"
         icon2="fa-solid fa-arrow-right-from-bracket"
         btn2="Sair"
-        :method2="sair"
+        :method2="logout"
       />
 
       <SideBarButtons
         title="Colaboradores"
         icon1="fa-solid fa-user-plus"
         btn1="Cadastrar"
-        :method1="cadastraUser"
+        :method1="collaboratorRegister"
         icon2="fa-solid fa-list"
         btn2="Listar"
-        :method2="listaUsers"
+        :method2="collaboratorsList"
       />
 
       <SideBarButtons
         title="Itens"
         icon1="fa-solid fa-circle-plus"
         btn1="Cadastrar"
-        :method1="cadastraItens"
+        :method1="itemRegister"
         icon2="fa-solid fa-share-nodes"
         btn2="Emprestar"
-        :method2="emprestaItens"
+        :method2="borrowItems"
       />
     </div>
 
     <!-- BUTTONS toggleSideBar=false-->
     <div class="text-center" v-show="!toggleSideBar">
       <div class="col mb-5">
-        <SmallIcon icon="fa-solid fa-chart-simple" :method="inventario" />
-        <SmallIcon icon="fa-solid fa-arrow-right-from-bracket" :method="sair" />
+        <SmallIcon icon="fa-solid fa-chart-simple" :method="inventory" />
+        <SmallIcon icon="fa-solid fa-arrow-right-from-bracket" :method="logout" />
       </div>
       <div class="col mb-5">
-        <SmallIcon icon="fa-solid fa-user-plus" :method="cadastraUser" />
-        <SmallIcon icon="fa-solid fa-list" :method="listaUsers" />
+        <SmallIcon icon="fa-solid fa-user-plus" :method="collaboratorRegister" />
+        <SmallIcon icon="fa-solid fa-list" :method="collaboratorsList" />
       </div>
       <div class="col mb-5">
-        <SmallIcon icon="fa-solid fa-circle-plus" :method="cadastraItens" />
-        <SmallIcon icon="fa-solid fa-share-nodes" :method="emprestaItens" />
+        <SmallIcon icon="fa-solid fa-circle-plus" :method="itemRegister" />
+        <SmallIcon icon="fa-solid fa-share-nodes" :method="borrowItems" />
       </div>
     </div>
 
@@ -88,54 +89,53 @@ export default {
     toggleSwitch() {
 
       // Switch circle
-      let switchCircle = document.getElementById("switchCircle")
-      let switchDiv = document.getElementById("switchDiv")
-      let logoImg = document.getElementById("logo")
+      let switchCircle = document.getElementById("switchCircle");
+      let switchDiv = document.getElementById("switchDiv");
+      let logoImg = document.getElementById("logo");
 
       // Se não tiver classe switchCircle, adiciona
       if (switchCircle.className != "switchCircle") {
-        switchCircle.className = "switchCircle"
-        switchDiv.style.justifyContent = "center"
-        logoImg.style.width = "60px"
+        switchCircle.className = "switchCircle";
+        switchDiv.style.justifyContent = "center";
 
       } else {
         // Se houver, apaga
-        switchCircle.className = ""
-        switchDiv.style.justifyContent = "right"
-        logoImg.style.width = "auto"
+        switchCircle.className = "";
+        switchDiv.style.justifyContent = "right";
+        logoImg.style.width = "auto";
       }
-      this.$store.commit("template/controlSideBar")
+      this.$store.commit("template/controlSideBar");
     },
-    inventario() {
-      this.$router.push("/users/inventario")
+    inventory() {
+      this.$router.push("/users/inventario");
     },
-    sair() {
+    logout() {
       this.$store.commit("auth/logOutUser")
-      this.$toast.info(this.$store.getters["auth/setLogoutMsg"], {position: 'top-left'})
-      this.$router.push("/")
+      this.$toast.info(this.$store.getters["auth/setLogoutMsg"], {position: 'top-left'});
+      this.$router.push("/");
     },
-    cadastraUser() {
-      this.$router.push("/users/cadastro-colaborador")
+    collaboratorRegister() {
+      this.$router.push("/users/cadastro-colaborador");
     },
-    listaUsers() {
-      this.$router.push("/users/colaboradores")
+    collaboratorsList() {
+      this.$router.push("/users/colaboradores");
     },
-    cadastraItens() {
-      this.$router.push("/users/cadastro-item")
+    itemRegister() {
+      this.$router.push("/users/cadastro-item");
     },
-    emprestaItens() {
-      this.$router.push("/users/emprestar")
+    
+    borrowItems() {
+      this.$router.push("/users/emprestar");
     },
   },
   computed: {
-
     // Retorna o estilo do sideBar
     sidebar() {
-      return this.$store.getters["template/sidebar"]
+      return this.$store.getters["template/sidebar"];
     },
     // Controla o sideBar e tipos de botões
     toggleSideBar() {
-      return this.$store.state.template.toggleSideBar
+      return this.$store.state.template.toggleSideBar;
     }
 
   },
@@ -183,7 +183,7 @@ label {
 .side-bar {
   position: sticky;
   top: 0;
-  background-color: rgb(14, 34, 63);
+  background-color: #4B0082;
   padding-right: 10px;
 }
 </style>
