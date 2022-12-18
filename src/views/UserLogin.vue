@@ -18,7 +18,7 @@
         <div class="col-5">
             <div class="container">
                 <div class="criar-conta">
-                    <span>Não possui uma conta?</span>
+                    <span class="text-info">Não possui uma conta?</span>
                     <button
                     id="create-account" 
                     class="btn btn-outline-info" 
@@ -60,21 +60,21 @@
                             </span>
                         </div>
                         <button 
-                        class="btn btn-outline-info" 
+                        class="btn btn-outline-danger" 
                         type="button" 
                         @click="cleanForm">
                         Limpar
                         </button>
                         <button 
                         type="submit" 
-                        class="btn btn-info">
+                        class="btn btn-outline-info">
                         Entrar
                         </button>
                     </login-form>
                     <div class="alternative">
                         <button 
                         id="google" 
-                        class="btn btn-outline-info" 
+                        class="btn btn-outline-light" 
                         @click="enterWithGoogle">
                         Entrar com Google
                         </button>
@@ -203,7 +203,7 @@ export default {
 }
 /* Div da Coluna de login */
 .col-5 {
-    background-color: rgb(14, 34, 63);
+    background-color: #4B0082;
     padding-right: 40px;
     padding-left: 90px;
     display: flex;

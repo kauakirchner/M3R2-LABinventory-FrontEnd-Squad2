@@ -70,14 +70,13 @@ label {
     align-items: center;
     width: 260px;
     height: 340px;
-    background-color: rgb(187, 218, 245);
+    background-color: #2196f3;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
 }
 .fourth {
-    
     font-weight: bold;
-    color: rgb(17, 110, 183);
+    color: #111;
 }
 </style>

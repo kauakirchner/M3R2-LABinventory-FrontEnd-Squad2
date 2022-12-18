@@ -157,7 +157,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-outline-danger"
+              class="btn btn-danger"
               data-bs-dismiss="modal"
               @click="delItem"
             >
@@ -165,14 +165,14 @@
             </button>
             <button
               type="button"
-              class="btn btn-outline-info"
+              class="btn btn-info"
               data-bs-dismiss="modal"
             >
               Sair
             </button>
             <button
               type="button"
-              class="btn btn-info"
+              class="btn btn-primary"
               data-bs-dismiss="modal"
               @click="saveItem"
             >

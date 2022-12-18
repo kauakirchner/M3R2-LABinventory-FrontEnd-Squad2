@@ -1,7 +1,6 @@
 <template>
     <div class="container p-5">
-    <h3>Buscar por patrimônio</h3>
-        <!-- BARRA DE BUSCA -->
+        <h3>Buscar por patrimônio</h3>
         <div class="container p-4">
         <div class="container">
             <div class="row mb-3" >
@@ -24,8 +23,6 @@
         <div class="container mt-5 mb-5">
             <h3>Situação atual</h3>
         </div>
-
-        <!-- TABELA DE ITENS e situação -->
         <div class="container">
             <table class="table table-hover table-borderless align-middle">
                 <thead>
@@ -85,14 +82,13 @@
 
 <script>
 
-import ModalEditItem from './ModalEditItem.vue'
+import ModalEditItem from './ModalEditItem.vue';
 
 export default {
 
     components: {
-   
         ModalEditItem
-},
+    },
     data() {
         return {
             items: [],
