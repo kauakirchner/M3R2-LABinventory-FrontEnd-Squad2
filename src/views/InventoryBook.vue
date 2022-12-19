@@ -45,7 +45,7 @@
       <div class="inv-card shadow" v-for="item in items" :key="item._id.$oid">
         <MediumCard
           cardType="inventory"
-          :img="item.url"
+          :img="item.image"
           :first="item.descricao"
           :second="item.marca"
           :third="item.modelo"

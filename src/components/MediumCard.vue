@@ -5,19 +5,15 @@
         id="modal-btn" 
         data-bs-toggle="modal" 
         :data-bs-target="cardType == 'inventory' ? '#editItemModal' : '#collabModal'">
-        <!-- cardType define se imagem ou gravatar -->
             <img 
             v-if="cardType == 'inventory'" 
             class="img" 
             :src="img" 
             alt="Imagem do item">
-            <vue-gravatar 
-            class="gravatar rounded-circle" 
-            :email="img" size="100" v-else/>
+            <img :src="img" size="100" class="img" alt="" v-else>
             <span class="first mb-3 mt-3 lh-1 fw-bold">{{ first }}</span>
             <p class="second">{{ second }}</p>
             <p class="third">{{ third }}</p>
-            <!-- cardType define se <span/> ou <p/> -->
             <span 
             class="fourth" 
             v-if="cardType == 'inventory' && (fourth == 'Item disponível' || fourth == '')">

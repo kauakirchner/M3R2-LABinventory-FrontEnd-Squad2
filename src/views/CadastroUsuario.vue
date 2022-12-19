@@ -19,7 +19,7 @@
         v-slot="{ errors }"
       >
         <div class="row mb-2">
-          <div class="col-6">
+          <div class="col-3">
             <label class="form-label">Nome completo</label>
             <collab-field
               type="text"
@@ -29,6 +29,18 @@
               :disabled="disabled"
             />
             <span class="text-danger" v-text="errors.name" v-show="errors.name">
+            </span>
+          </div>
+          <div class="col-3">
+            <label class="form-label">Foto</label>
+            <collab-field
+              type="file"
+              class="form-control"
+              name="image"
+              @change="setCollaboratorImage"
+              :disabled="disabled"
+            />
+            <span class="text-danger" v-text="errors.image" v-show="errors.image">
             </span>
           </div>
           <div class="col-3">
@@ -270,13 +282,14 @@ export default {
         cep: "required",
         localidade: "required",
         bairro: "required",
-        logradouro: "required"
+        logradouro: "required",
+        image: "required"
 
       },
-      collab: {}, // Recebe os inputs
+      collab: {},
       address: {},
-      disabled: true, // Inputs desabilitados
-      cepNum: null, // Recebe o input de CEP
+      disabled: true, 
+      cepNum: null,
       isLoading: false,
     };
   },
@@ -288,9 +301,7 @@ export default {
     },
   },
   methods: {
-    // Chamado quando houver 8 caracteres ou mais no input CEP
     getCepInfo() {
-      // Valida o CEP e preenche os campos relacionados
       this.$store.dispatch("collaborators/cepInfo", this.cepNum).then(() => {
         this.address = {
           cep: this.cepNum,
@@ -300,6 +311,14 @@ export default {
           uf: this.cepInfo.uf,
         };
       });
+    },
+    setCollaboratorImage(event) {
+      let image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.collab.foto = event.target.result;
+      }
+      reader.readAsDataURL(image);
     },
     saveCollab() {
       let collabData = {
@@ -328,8 +347,6 @@ export default {
       this.address = {};
       this.cepNum = null;
     },
-    // Acionado pelo switch button,
-    // Habilita/desabilita edição dos campos
     edit() {
       if (this.disabled) {
         this.disabled = false;
