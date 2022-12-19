@@ -126,6 +126,21 @@
                   >
                   </span>
                 </div>
+                <div class="col-12">
+                  <label class="form-label">Foto</label>
+                  <collab-field
+                    type="file"
+                    class="form-control"
+                    name="image"
+                    @change="setCollaboratorImage"
+                  />
+                  <span
+                    class="text-danger"
+                    v-text="errors.image"
+                    v-show="errors.image"
+                  >
+                  </span>
+                </div>
               </div>
 
               <h5 class="mt-3">Dados de endereço</h5>
@@ -297,6 +312,7 @@ export default {
         email: "required|emailcheck",
         job: "required",
         cep: "required",
+        image: "required"
       },
       collab: {},
       cepNum: null, 
@@ -328,6 +344,15 @@ export default {
         this.collab.logradouro = this.cepInfo.logradouro;
         this.collab.bairro = this.cepInfo.bairro;
       })
+    },
+
+    setCollaboratorImage(event) {
+      let image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.collab.foto = event.target.result;
+      }
+      reader.readAsDataURL(image);
     },
 
     saveCollab() {

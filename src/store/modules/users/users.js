@@ -4,8 +4,6 @@ export default {
     namespaced: true,
     state() {
         return {
-            // Utilizado para disparar mensagem de finalização
-            // no compenente ModalNewAccount
             success: false,
             account: null,
             users: [],

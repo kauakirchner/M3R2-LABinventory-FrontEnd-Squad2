@@ -95,17 +95,18 @@
               </div>
               <div class="row mb-3">
                 <div class="col-12">
-                  <label class="form-label">URL da imagem do item</label>
+                  <label class="form-label">Imagem do item</label>
                   <editItem-field
-                    type="text"
+                    type="file"
                     class="form-control"
-                    name="url"
-                    v-model="item.url"
+                    ref="image"
+                    name="image"
+                    @change="setProductImage"
                   />
                   <span
                     class="text-danger"
-                    v-text="errors.url"
-                    v-show="errors.url"
+                    v-text="errors.image"
+                    v-show="errors.image"
                   >
                   </span>
                 </div>
@@ -202,7 +203,7 @@ export default {
         titulo: "required",
         categoria: "required",
         valor: "required|pricecheck",
-        url: "required|urlcheck",
+        image: "required",
         marca: "required",
         modelo: "required",
       },
@@ -210,6 +211,14 @@ export default {
     };
   },
   methods: {
+    setProductImage(event) {
+      let image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.item.image = event.target.result;
+      }
+      reader.readAsDataURL(image);
+    },
     saveItem() {
       const value = this.item.valor;
       this.item.valor = value.replace(",", ".");
@@ -220,7 +229,7 @@ export default {
         titulo: this.item.titulo,
         categoria: this.item.categoria,
         valor: this.item.valor,
-        url: this.item.url,
+        image: this.item.image,
         marca: this.item.marca,
         modelo: this.item.modelo,
         descricao: this.item.descricao,
@@ -241,7 +250,7 @@ export default {
         titulo: novoItem.titulo,
         categoria: novoItem.categoria,
         valor: novoItem.valor.toFixed(2).replace(".", ","),
-        url: novoItem.url,
+        image: novoItem.image,
         marca: novoItem.marca,
         modelo: novoItem.modelo,
         descricao: novoItem.descricao,

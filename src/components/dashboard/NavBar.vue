@@ -1,16 +1,13 @@
 <template>
-<div class="navbar-div">
-    <!-- TÍTULO: referente a rota renderizada -->
-    <div id="title">
-        <p class="current-route">{{path}}</p>
+    <div class="navbar-div">
+        <div id="title">
+            <p class="current-route">{{path}}</p>
+        </div>
+        <div id="user">
+            <span v-text="userName"></span>
+            <vue-gravatar class="gravatar" :email="user" size="40"/>
+        </div>
     </div>
-    <!-- USER: nome e imagem -->
-    <div id="user">
-        <span v-text="userName"></span>
-        <vue-gravatar class="gravatar" :email="user" size="40"/>
-    </div>
-
-</div>
 </template>
 <script>
 import { useCookies } from 'vue3-cookies';
@@ -21,12 +18,11 @@ export default {
     data() {
         
         return {
-            user: 'teste@teste.com', // Modificado pelo mounted
-            userName: 'Username' // Modificado pelo mounted
+            user: 'teste@teste.com',
+            userName: 'Username'
         }
     },
     computed: {
-        // Retorna o nome da rota atual
         path() {
             let pathInfo = this.$router.currentRoute.value.fullPath;
             let currPath = pathInfo.split('/')[2];
@@ -35,7 +31,7 @@ export default {
             let secondName = splitName[1];
             let name1 = `${firstName.charAt(0).toUpperCase() + firstName.slice(1)} de ${secondName}`;
             let name2 = `${firstName.charAt(0).toUpperCase() + firstName.slice(1)}`;
-            return splitName.length > 1 ? name1 : name2 ;
+            return splitName.length > 1 ? name1 : name2;
         },
     },
     mounted() {
@@ -45,7 +41,6 @@ export default {
 }
 </script>
 <style scoped>
-/* Div GERAL */
 .navbar-div {
     position: sticky;
     top: 0;
@@ -57,7 +52,6 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
-/* TÍTULO */
 p {
     color: rgb(7, 201, 239);
     font-size: 1.5em;
@@ -65,12 +59,10 @@ p {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-/* USER NAME */
 span {
     color: rgb(7, 201, 239);
     margin-right: 10px;
 }
-/* USER IMAGE */
 .gravatar {
     border-radius: 50%;
 }

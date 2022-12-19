@@ -18,7 +18,7 @@
         <div  class="cards shadow" v-for="collab in collabs" :key="collab._id.$oid">
             <MediumCard
             cardType="user-list" 
-            :img="collab.email" 
+            :img="collab.foto" 
             :first="collab.nome" 
             :second="collab.email" 
             :third="collab.telefone" 
@@ -43,7 +43,6 @@ export default {
     },
     data() {
         return {
-            // Inicialmente populada pelo mounted, depois pela barra de busca
             collabs: [],
             barraPesquisa: '' 
         }

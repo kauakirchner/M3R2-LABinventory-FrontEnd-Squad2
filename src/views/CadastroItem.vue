@@ -86,17 +86,19 @@
                         </span>
                     </div>
                     <div class="col-9">
-                        <label class="form-label">URL do produto</label>
+                        <label class="form-label">Imagem do Produto</label>
                         <newitem-field 
-                        type="text" 
+                        ref="image"
+                        @change="setProductImage"
+                        v-model="item.image"
+                        type="file" 
                         class="form-control" 
-                        name="url" 
-                        v-model="item.url" 
+                        name="image" 
                         :disabled="disabled"/>
                         <span 
                         class="text-danger" 
-                        v-text="errors.url" 
-                        v-show="errors.url">
+                        v-text="errors.image" 
+                        v-show="errors.image">
                         </span>
                     </div>
                     <div class="loading-container" v-show="isLoading">
@@ -193,7 +195,7 @@ export default {
                 titulo: 'required',
                 categoria: 'required',
                 valor: 'required|pricecheck|positivocheck',
-                url: 'required|urlcheck',
+                image: 'required',
                 marca: 'required',
                 modelo: 'required',
                 descricao: 'required'
@@ -205,9 +207,16 @@ export default {
     },
     methods: {
         ...mapMutations(["itens/editItem"]),
+        setProductImage(event) {
+            let image = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                this.item.image = event.target.result;
+            }
+            reader.readAsDataURL(image);
+        },
         saveItem() {
-            alert("teste")
-            let value = this.item.valor;
+            const value = this.item.valor;
             this.item.valor = value.replace(",", ".");
             this.item.valor = Number(this.item.valor);
             this.item.emprestado = 'Item disponível';
