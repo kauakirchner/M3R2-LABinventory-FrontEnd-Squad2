@@ -1,6 +1,5 @@
 <template>
     <div class="cadastroItem">
-    <!-- TÍTULO e SWITCH -->
         <div class="header">
             <p class="text-blue">Preencha os campos para cadastrar</p>
             <div class="switch-div">
@@ -11,7 +10,6 @@
                 </label>
              </div>
         </div>
-        <!-- FORM Cadastro de Item -->
         <div class="container">
             <newitem-form 
             @submit="saveItem" 
@@ -19,7 +17,7 @@
             :validation-schema="schema" 
             v-slot="{ errors }">
                 <div class="row mb-2">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-3">
                         <label class="form-label text-light">Código de patrimônio</label>
                         <newitem-field 
                             type="text" 
@@ -36,7 +34,7 @@
                         v-show="errors.patrimonio">
                         </span>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-6">
                         <label class="form-label text-light">Título</label>
                         <newitem-field 
                         type="text" 
@@ -50,7 +48,7 @@
                         v-show="errors.titulo">
                         </span>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-3">
                         <label class="form-label text-light">Categoria</label>
                         <newitem-field 
                         as="select" 
@@ -70,7 +68,7 @@
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-3">
                         <label class="form-label text-light">Valor R$</label>
                         <newitem-field 
                         type="text" 
@@ -85,7 +83,7 @@
                         v-show="errors.valor" >
                         </span>
                     </div>
-                    <div class="col-9">
+                    <div class="col-lg-9 col-sm-3">
                         <label class="form-label text-light">Imagem do Produto</label>
                         <newitem-field 
                         ref="image"
@@ -106,7 +104,7 @@
                     </div>
                 </div>
                 <div class="row mb-2">
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-6">
                         <label class="form-label text-light">Marca</label>
                         <newitem-field 
                         type="text" 
@@ -120,7 +118,7 @@
                         v-show="errors.marca">
                         </span>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-sm-3">
                         <label class="form-label text-light">Modelo</label>
                         <newitem-field 
                         type="text" 
@@ -136,7 +134,7 @@
                     </div>
                 </div>
                 <div class="row mb-2">
-                <div class="col-12">
+                <div class="col-lg-12 col-sm-6">
                     <label class="form-label text-light">Descrição</label>
                     <newitem-field as="textarea" 
                     id="text-area"
@@ -260,6 +258,11 @@ export default {
 </script>
 <style scoped>
 
+@media (max-width: 480px) {
+    .text-blue {
+        font-size: 18pxd;
+    }
+}
 .text-blue {
     color: #2196f3;
 }
