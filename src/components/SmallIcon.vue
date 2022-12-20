@@ -17,7 +17,7 @@ export default {
 </script>
 <style scoped>
 i {
-  color: rgb(7, 201, 239);
+  color: #fff;
 }
 
 .center-icon{
@@ -32,7 +32,7 @@ i {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  border: 1px solid rgb(7, 201, 239);
+  border: 2px solid #fff;
   padding: 6px 12px;
   width: 34px;
   height: 34px;
@@ -40,10 +40,11 @@ i {
 }
 
 .onlyIcon:hover {
-  background-color: rgb(7, 201, 239);
+  background-color: #fff;
 }
 
 .onlyIcon:hover i {
-  color: rgb(14, 34, 63);
+  color: #2196f3;
+
 }
 </style>
