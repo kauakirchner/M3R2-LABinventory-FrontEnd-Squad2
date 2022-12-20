@@ -1,14 +1,12 @@
 <template>
-    <div class="container p-5">
-        <h3>Buscar por patrimônio</h3>
-        <div class="container p-4">
-        <div class="container">
-            <div class="row mb-3" >
-                <div class="col-12">
+    <div class="containe-fluid p-4">
+        <div class="container header">
+            <div class="row mb-3">
+                <div class="row header">
                     <label 
                     id="collab-search-title" 
                     class="form-label">
-                    <h3>Buscar itens</h3>
+                    <h3>Buscar itens por código de patrimônio</h3>
                     </label>
                     <input 
                     class="form-control shadow" 
@@ -16,65 +14,64 @@
                     type="text"
                     placeholder="Digite para buscar..."
                     v-model="barraPesquisa" 
+                    v-mask="'AA####-###'"
                     @input="setItems">
                 </div>
             </div>
-        </div>
-        <div class="container mt-5 mb-5">
-            <h3>Situação atual</h3>
-        </div>
-        <div class="container">
-            <table class="table table-hover table-borderless align-middle">
-                <thead>
-                    <tr>
-                    <th scope="col">Patrimônio</th>
-                    <th scope="col">Título</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">Emprestado para</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr 
-                    v-for="(item, index) in (barraPesquisa ? items : itemsLocal)" 
-                    :key="item.patrimonio" 
-                    @click="editItem(item.patrimonio)">
-                        <td 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#editItemModal">
-                        <span>{{ item.patrimonio }}</span></td>
-                        <td 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#editItemModal">
-                        <span>{{ item.titulo }}</span></td>
-                        <td 
-                        data-bs-toggle="modal" 
-                        data-bs-target="#editItemModal">
-                        <span>{{ item.categoria }}</span></td>
-                        <td>
-                            <select 
-                            :id="index" 
-                            class="form-select shadow" 
-                            @input="emprestar(item, index)">
-                                <option disabled selected>
-                                {{ item.emprestado }}
-                                </option>
-                                <option 
-                                v-for="name in allCollabs" 
-                                :value="name.nome" 
-                                :key="name.nome">
-                                {{name.nome}}
-                                </option>
-                                <option 
-                                v-show="item.emprestado !== 'Item disponível'" 
-                                value="Item disponível">
-                                Item disponível
-                                </option>
-                            </select>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+            <section class="">
+                <div class="col-lg-12 col-sm-3 table-responsive">
+                    <table class="table table-hover table-borderless align-middle table-striped ">
+                        <thead class="table-primary">
+                            <tr>
+                            <th scope="col">Patrimônio</th>
+                            <th scope="col ">Título</th>
+                            <th scope="col ">Categoria</th>
+                            <th scope="col ">Emprestado para</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr 
+                            v-for="(item, index) in (barraPesquisa ? items : itemsLocal)" 
+                            :key="item.patrimonio" 
+                            @click="editItem(item.patrimonio)">
+                                <td 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editItemModal">
+                                <span>{{ item.patrimonio }}</span></td>
+                                <td 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editItemModal">
+                                <span>{{ item.titulo }}</span></td>
+                                <td 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#editItemModal">
+                                <span>{{ item.categoria }}</span></td>
+                                <td>
+                                    <select 
+                                    :id="index" 
+                                    class="form-select shadow" 
+                                    @input="emprestar(item, index)">
+                                        <option disabled selected>
+                                        {{ item.emprestado }}
+                                        </option>
+                                        <option 
+                                        v-for="name in allCollabs" 
+                                        :value="name.nome" 
+                                        :key="name.nome">
+                                        {{name.nome}}
+                                        </option>
+                                        <option 
+                                        v-show="item.emprestado !== 'Item disponível'" 
+                                        value="Item disponível">
+                                        Item disponível
+                                        </option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
         </div>
         <ModalEditItem></ModalEditItem>
     </div>
@@ -83,9 +80,10 @@
 <script>
 
 import ModalEditItem from './ModalEditItem.vue';
+import { mask } from 'vue-the-mask';
 
 export default {
-
+    directives: { mask },
     components: {
         ModalEditItem
     },
@@ -164,6 +162,39 @@ th {
 }
 td:hover {
     cursor: pointer;
+}
+
+@media (max-width: 480px) {
+    .table-container {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+section {
+   width: 100%;
+   min-height: 100vh;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    section {
+        padding: 50px;
+    }
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.shadow {
+    width: 100%!important;
 }
 
 </style>

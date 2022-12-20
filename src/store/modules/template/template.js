@@ -12,7 +12,7 @@ export default {
       // Controla o SWITCH para esconder SideBar
       controlSideBar(state) {
         if (state.toggleSideBar) {
-          state.sidebarWidth = 70
+          state.sidebarWidth = 50
           state.toggleSideBar = false
         } else {
           state.sidebarWidth = 300
