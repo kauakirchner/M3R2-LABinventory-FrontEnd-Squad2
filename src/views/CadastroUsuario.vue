@@ -5,7 +5,7 @@
         <p class="text-blue">Preencha os campos para cadastrar</p>
       </div>
       <div id="switch-div" class="switch-div">
-        <span id="switch-editar">Editar</span>
+        <span id="switch-editar" class="text-blue">Editar</span>
         <label class="switch">
           <input type="checkbox" @click="edit" />
           <span class="slider round"></span>
@@ -19,8 +19,8 @@
         :validation-schema="schema"
         v-slot="{ errors }"
       >
-        <div class="row mb-2">
-          <div class="col-3">
+        <div class="row mb-1">
+          <div class="col-lg-3 col-sm-2">
             <label class="form-label text-light">Nome completo</label>
             <collab-field
               type="text"
@@ -32,7 +32,7 @@
             <span class="text-danger" v-text="errors.name" v-show="errors.name">
             </span>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-sm-2">
             <label class="form-label text-light">Foto</label>
             <collab-field
               type="file"
@@ -44,7 +44,7 @@
             <span class="text-danger" v-text="errors.image" v-show="errors.image">
             </span>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-sm-2">
             <label class="form-label text-light">Gênero</label>
             <collab-field
               as="select"
@@ -64,7 +64,7 @@
             >
             </span>
           </div>
-          <div class="col-3">
+          <div class="col-lg-3 col-sm-2">
             <label class="form-label text-light">Data de nascimento</label>
             <collab-field
               type="date"
@@ -82,7 +82,7 @@
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">Telefone</label>
             <collab-field
               type="text"
@@ -100,7 +100,7 @@
             >
             </span>
           </div>
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">E-mail</label>
             <collab-field
               type="email"
@@ -116,7 +116,7 @@
             >
             </span>
           </div>
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">Cargo</label>
             <collab-field
               as="select"
@@ -139,7 +139,7 @@
         </div>
         <h5 class="text-light">Dados de endereço</h5>
         <div class="row mb-2">
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">CEP</label>
             <collab-field
               type="text"
@@ -154,7 +154,7 @@
             <span class="text-danger" v-text="cepError" v-show="cepError">
             </span>
           </div>
-          <div class="col-6">
+          <div class="col-lg-4 col-sm-2">
             <label class="form-label text-light">Cidade</label>
             <collab-field
               v-model="address.localidade"
@@ -165,7 +165,7 @@
               readonly
             />
           </div>
-          <div class="col-2">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">Estado</label>
             <collab-field
               v-model="address.uf"
@@ -178,7 +178,7 @@
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-10">
+          <div class="col-lg-6 col-sm-3">
             <label class="form-label text-light">Logradouro</label>
             <collab-field
               v-model="address.logradouro"
@@ -190,7 +190,7 @@
             <span class="text-danger" v-text="errors.logradouro" v-show="errors.logradouro">
             </span>
           </div>
-          <div class="col-2">
+          <div class="col-lg-6 col-sm-3">
             <label class="form-label text-light">Número</label>
             <collab-field
               type="text"
@@ -205,7 +205,7 @@
           </div>
         </div>
         <div class="row mb-2">
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">Complemento</label>
             <collab-field
               type="text"
@@ -215,7 +215,7 @@
               :disabled="disabled"
             />
           </div>
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">Bairro</label>
             <collab-field
               id="bairro"
@@ -226,7 +226,7 @@
               :disabled="disabled"
             />
           </div>
-          <div class="col-4">
+          <div class="col-lg-4 col-sm-3">
             <label class="form-label text-light">Ponto de referência</label>
             <collab-field
               type="text"
@@ -375,6 +375,11 @@ export default {
 </script>
 <style scoped>
 
+@media (max-width: 480px) {
+  .text-blue {
+    font-size: 18px;
+  }
+}
 .text-blue {
   color: #2196f3;
   text-align: center;

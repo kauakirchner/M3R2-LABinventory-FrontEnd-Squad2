@@ -79,6 +79,16 @@
                     v-show="showConfirmError" >
                     </span>
                 </div>
+                <div class="mb-3">
+                  <label class="form-label">Foto</label>
+                  <newuser-field 
+                    type="file"
+                    class="form-control"
+                    name="image"
+                    @change="setUserImage"
+                  />
+                  <span class="text-danger" v-text="errors.image"></span>
+                </div> 
             </newuser-form>
           </div>
           <div class="modal-footer">
@@ -120,6 +130,7 @@ export default {
         name: 'required',
         email: 'required|emailcheck',
         password: 'required|password',
+        image: 'required'
       
       },
       user: {},
@@ -179,6 +190,15 @@ export default {
   },
   methods: {
     ...mapActions(["users/setAccount"]),
+
+    setUserImage(event) {
+      let image = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.user.image = event.target.result;
+      }
+      reader.readAsDataURL(image);
+    },
     setUserAccount() {
       this['users/setAccount']({...this.user})
       .then(() => {

@@ -16,13 +16,11 @@ export default {
     };
   },
   actions: {
-    // Autenticação do login
-    // Parâmetro "user" enviado pelo commit do login
     async authentication(context, user) {
       context.commit("setSuccess", false);
       context.commit("setUser", null);
 
-      await axios.post("https://labinventory-backend-vjqcwqvuka-uc.a.run.app/users/login", user)
+      await axios.post("http://localhost:5000/users/login", user)
       .then((response) => {
         if(response.data.status_code !== 401) {
           context.commit("setSuccess", true);
@@ -47,7 +45,7 @@ export default {
     },
     async getUrlAuth(context) {
       context.commit("setURL", null);
-      await axios.post("https://labinventory-backend-vjqcwqvuka-uc.a.run.app/users/auth/google")
+      await axios.post("http://localhost:5000/users/auth/google")
       .then((response) => {
         context.commit("setURL", response.data.url);
       })   
@@ -70,20 +68,13 @@ export default {
       state.user = user;
     },
     logOutUser(state) {
-      // Verifica se o usuário está deslogado
-      // por motivo de cookie apagado
       let check = cookies.get("logged");
       if (check !== null) {
-        // Se houver um cookie, a chave status torna-se false
         check.status = false;
         cookies.set("logged", check);
-        // O state então armazena o sinal de logout true
         state.logoutMsg = "Logout efetuado com sucesso.";
       }
-      // Se o cookie foi apagado
       if (check === null) {
-        // o state armazena o sinal
-        //state.alreadyLogout = true
         state.logoutMsg = "Você já efetuou o logout!";
       }
     },

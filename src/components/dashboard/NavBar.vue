@@ -1,11 +1,11 @@
 <template>
     <div class="navbar-div">
         <div id="title">
-            <p class="current-route">{{path}}</p>
+            <p class="current-route" id="current-route">{{path}}</p>
         </div>
         <div id="user">
-            <span v-text="userName"></span>
-            <vue-gravatar class="gravatar" :email="user" size="40"/>
+        <span v-text="userName"></span>
+        <img :src="userImage" alt="" class="img">
         </div>
     </div>
 </template>
@@ -19,7 +19,7 @@ export default {
         
         return {
             user: 'teste@teste.com',
-            userName: 'Username'
+            userName: 'Username',
         }
     },
     computed: {
@@ -33,6 +33,11 @@ export default {
             let name2 = `${firstName.charAt(0).toUpperCase() + firstName.slice(1)}`;
             return splitName.length > 1 ? name1 : name2;
         },
+        
+        userImage() {
+            const image = localStorage.getItem("userImage");
+            return image;
+        }
     },
     mounted() {
         this.user = cookies.get('logged').email;
@@ -52,7 +57,7 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
-p {
+.current-route {
     color: #fff;
     font-size: 1.5em;
     margin: 0;
@@ -63,7 +68,23 @@ span {
     color: #fff;
     margin-right: 10px;
 }
-.gravatar {
-    border-radius: 50%;
+
+.img {
+    width: 40px;
+    border-radius: 30%;
+}
+
+@media screen and (max-width: 720px) {
+    .current-route {
+        color: #fff;
+        font-size: 14px;
+        margin: 0;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    span {
+        font-size: 12px;
+    }
 }
 </style>

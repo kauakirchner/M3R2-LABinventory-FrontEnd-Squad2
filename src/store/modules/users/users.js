@@ -30,10 +30,12 @@ export default {
             const headers = {
                 "Content-Type": "application/json"
             }
-            await axios.post("https://labinventory-backend-vjqcwqvuka-uc.a.run.app/users/create", user, headers)
+            await axios.post("http://localhost:5000/users/create", user, headers)
             .then((response) => {
                 if(response.status == 201) {
                     context.commit('setSuccess', true);
+                    context.commit('setUsers', user)
+                    localStorage.setItem("userImage", user.image)
                 }
                 return true;
             })
