@@ -149,11 +149,9 @@ export default {
     },
     async saveCollab(context, colab) {
       let collab = {...colab.collab, ...colab.address}
-      // Zerando variáveis de controle
       context.commit("setSaveSuccess", false);
       context.commit("setExists", false);
       context.commit("setResetCollabs");
-      // Se flag edit estiver true, entra no bloco pra requisição put
       if (context.state.editUser) {
         let id = colab._id
         await axios

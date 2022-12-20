@@ -34,6 +34,8 @@ export default {
             .then((response) => {
                 if(response.status == 201) {
                     context.commit('setSuccess', true);
+                    context.commit('setUsers', user)
+                    localStorage.setItem("userImage", user.image)
                 }
                 return true;
             })
