@@ -16,8 +16,6 @@ export default {
     };
   },
   actions: {
-    // Autenticação do login
-    // Parâmetro "user" enviado pelo commit do login
     async authentication(context, user) {
       context.commit("setSuccess", false);
       context.commit("setUser", null);
@@ -70,20 +68,13 @@ export default {
       state.user = user;
     },
     logOutUser(state) {
-      // Verifica se o usuário está deslogado
-      // por motivo de cookie apagado
       let check = cookies.get("logged");
       if (check !== null) {
-        // Se houver um cookie, a chave status torna-se false
         check.status = false;
         cookies.set("logged", check);
-        // O state então armazena o sinal de logout true
         state.logoutMsg = "Logout efetuado com sucesso.";
       }
-      // Se o cookie foi apagado
       if (check === null) {
-        // o state armazena o sinal
-        //state.alreadyLogout = true
         state.logoutMsg = "Você já efetuou o logout!";
       }
     },
