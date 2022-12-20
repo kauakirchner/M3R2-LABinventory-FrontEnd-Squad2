@@ -1,8 +1,10 @@
 <template>
   <div class="cadastroUsuario">
     <div class="header">
-      <p>Preencha os campos para cadastrar</p>
-      <div id="switch-div">
+      <div class="title-container">
+        <p class="text-blue">Preencha os campos para cadastrar</p>
+      </div>
+      <div id="switch-div" class="switch-div">
         <span id="switch-editar">Editar</span>
         <label class="switch">
           <input type="checkbox" @click="edit" />
@@ -10,9 +12,8 @@
         </label>
       </div>
     </div>
-    <!-- FORM Cadastro de Colaborador -->
     <div class="container">
-      <h5>Dados pessoais</h5>
+      <h5 class="text-light">Dados pessoais</h5>
       <collab-form
         id="collab-form"
         :validation-schema="schema"
@@ -20,7 +21,7 @@
       >
         <div class="row mb-2">
           <div class="col-3">
-            <label class="form-label">Nome completo</label>
+            <label class="form-label text-light">Nome completo</label>
             <collab-field
               type="text"
               class="form-control"
@@ -32,7 +33,7 @@
             </span>
           </div>
           <div class="col-3">
-            <label class="form-label">Foto</label>
+            <label class="form-label text-light">Foto</label>
             <collab-field
               type="file"
               class="form-control"
@@ -44,7 +45,7 @@
             </span>
           </div>
           <div class="col-3">
-            <label class="form-label">Gênero</label>
+            <label class="form-label text-light">Gênero</label>
             <collab-field
               as="select"
               class="form-select"
@@ -64,7 +65,7 @@
             </span>
           </div>
           <div class="col-3">
-            <label class="form-label">Data de nascimento</label>
+            <label class="form-label text-light">Data de nascimento</label>
             <collab-field
               type="date"
               class="form-control"
@@ -82,7 +83,7 @@
         </div>
         <div class="row mb-2">
           <div class="col-4">
-            <label class="form-label">Telefone</label>
+            <label class="form-label text-light">Telefone</label>
             <collab-field
               type="text"
               class="form-control"
@@ -100,7 +101,7 @@
             </span>
           </div>
           <div class="col-4">
-            <label class="form-label">E-mail</label>
+            <label class="form-label text-light">E-mail</label>
             <collab-field
               type="email"
               class="form-control"
@@ -116,7 +117,7 @@
             </span>
           </div>
           <div class="col-4">
-            <label class="form-label">Cargo</label>
+            <label class="form-label text-light">Cargo</label>
             <collab-field
               as="select"
               class="form-select"
@@ -136,10 +137,10 @@
         <div class="loading-container" v-show="isLoading">
           <div class="loading" />
         </div>
-        <h5>Dados de endereço</h5>
+        <h5 class="text-light">Dados de endereço</h5>
         <div class="row mb-2">
           <div class="col-4">
-            <label class="form-label">CEP</label>
+            <label class="form-label text-light">CEP</label>
             <collab-field
               type="text"
               class="form-control"
@@ -154,7 +155,7 @@
             </span>
           </div>
           <div class="col-6">
-            <label class="form-label">Cidade</label>
+            <label class="form-label text-light">Cidade</label>
             <collab-field
               v-model="address.localidade"
               id="localidade"
@@ -165,7 +166,7 @@
             />
           </div>
           <div class="col-2">
-            <label class="form-label">Estado</label>
+            <label class="form-label text-light">Estado</label>
             <collab-field
               v-model="address.uf"
               id="uf"
@@ -178,7 +179,7 @@
         </div>
         <div class="row mb-2">
           <div class="col-10">
-            <label class="form-label">Logradouro</label>
+            <label class="form-label text-light">Logradouro</label>
             <collab-field
               v-model="address.logradouro"
               type="text"
@@ -190,7 +191,7 @@
             </span>
           </div>
           <div class="col-2">
-            <label class="form-label">Número</label>
+            <label class="form-label text-light">Número</label>
             <collab-field
               type="text"
               class="form-control"
@@ -205,7 +206,7 @@
         </div>
         <div class="row mb-2">
           <div class="col-4">
-            <label class="form-label">Complemento</label>
+            <label class="form-label text-light">Complemento</label>
             <collab-field
               type="text"
               class="form-control"
@@ -215,7 +216,7 @@
             />
           </div>
           <div class="col-4">
-            <label class="form-label">Bairro</label>
+            <label class="form-label text-light">Bairro</label>
             <collab-field
               id="bairro"
               v-model="address.bairro"
@@ -226,7 +227,7 @@
             />
           </div>
           <div class="col-4">
-            <label class="form-label">Ponto de referência</label>
+            <label class="form-label text-light">Ponto de referência</label>
             <collab-field
               type="text"
               class="form-control"
@@ -237,7 +238,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-warning" type="button" @click="cleanForm">
+          <button class="btn btn-warning text-light" type="button" @click="cleanForm">
             Limpar
           </button>
           <button
@@ -373,6 +374,11 @@ export default {
 }
 </script>
 <style scoped>
+
+.text-blue {
+  color: #2196f3;
+  text-align: center;
+}
 .loading-container {
   display: flex;
   justify-content: center;
@@ -402,6 +408,8 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  max-width: 1320px;
+  margin-left: 12%;
 }
 #switch-editar {
   margin: 6px;
@@ -416,6 +424,8 @@ h5 {
 .cadastroUsuario {
   padding: 50px;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 .container {
   text-align: left;
@@ -423,7 +433,7 @@ h5 {
   background-color: #2196f3;
   border-radius: 5px;
 }
-.form-label {
+.form-label text-light {
   margin-bottom: 2px;
   font-size: 1em;
 }
@@ -461,7 +471,7 @@ h5 {
   transition: 0.4s;
 }
 input:checked + .slider {
-  background-color: rgb(7, 201, 239);
+  background-color: #2196f3;
 }
 input:focus + .slider {
   box-shadow: 0 0 1px rgb(7, 201, 239);
@@ -477,4 +487,13 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.title-container {
+  display: flex;
+}
+
+.switch-div {
+  display: flex;
+}
+
 </style>

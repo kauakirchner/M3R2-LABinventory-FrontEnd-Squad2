@@ -2,9 +2,9 @@
     <div class="cadastroItem">
     <!-- TÍTULO e SWITCH -->
         <div class="header">
-            <p>Preencha os campos para cadastrar</p>
-            <div>
-                <span id="switch-editar">Editar</span>
+            <p class="text-blue">Preencha os campos para cadastrar</p>
+            <div class="switch-div">
+                <span id="switch-editar" class="text-blue">Editar</span>
                 <label class="switch">
                     <input type="checkbox" @click="this.disabled = !this.disabled">
                     <span class="slider round"></span>
@@ -20,7 +20,7 @@
             v-slot="{ errors }">
                 <div class="row mb-2">
                     <div class="col-3">
-                        <label class="form-label">Código de patrimônio</label>
+                        <label class="form-label text-light">Código de patrimônio</label>
                         <newitem-field 
                             type="text" 
                             class="form-control" 
@@ -37,7 +37,7 @@
                         </span>
                     </div>
                     <div class="col-6">
-                        <label class="form-label">Título</label>
+                        <label class="form-label text-light">Título</label>
                         <newitem-field 
                         type="text" 
                         class="form-control" 
@@ -51,7 +51,7 @@
                         </span>
                     </div>
                     <div class="col-3">
-                        <label class="form-label">Categoria</label>
+                        <label class="form-label text-light">Categoria</label>
                         <newitem-field 
                         as="select" 
                         class="form-select" 
@@ -71,7 +71,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-3">
-                        <label class="form-label">Valor R$</label>
+                        <label class="form-label text-light">Valor R$</label>
                         <newitem-field 
                         type="text" 
                         class="form-control" 
@@ -86,7 +86,7 @@
                         </span>
                     </div>
                     <div class="col-9">
-                        <label class="form-label">Imagem do Produto</label>
+                        <label class="form-label text-light">Imagem do Produto</label>
                         <newitem-field 
                         ref="image"
                         @change="setProductImage"
@@ -107,7 +107,7 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-6">
-                        <label class="form-label">Marca</label>
+                        <label class="form-label text-light">Marca</label>
                         <newitem-field 
                         type="text" 
                         class="form-control" 
@@ -121,7 +121,7 @@
                         </span>
                     </div>
                     <div class="col-6">
-                        <label class="form-label">Modelo</label>
+                        <label class="form-label text-light">Modelo</label>
                         <newitem-field 
                         type="text" 
                         class="form-control" 
@@ -137,7 +137,7 @@
                 </div>
                 <div class="row mb-2">
                 <div class="col-12">
-                    <label class="form-label">Descrição</label>
+                    <label class="form-label text-light">Descrição</label>
                     <newitem-field as="textarea" 
                     id="text-area"
                     class="form-control" 
@@ -155,7 +155,7 @@
                 </div>
                 <div class="modal-footer">
                     <button 
-                    class="btn btn-warning" 
+                    class="btn btn-warning text-light" 
                     type="button" 
                     @click="cleanForm">
                     Limpar
@@ -259,6 +259,10 @@ export default {
 }
 </script>
 <style scoped>
+
+.text-blue {
+    color: #2196f3;
+}
 .loading-container {
     display: flex;
     justify-content: center;
@@ -291,7 +295,7 @@ p {
 #switch-editar {
     margin: 6px;
 }
-.form-label {
+.form-label text-light {
     margin-bottom: 2px;
     font-size: 1em;
 }
@@ -299,6 +303,8 @@ p {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
+    max-width: 1320px;
+    margin-left: 12%;
 }
 .cadastroItem {
     padding: 50px;
@@ -344,7 +350,7 @@ p {
   transition: .4s;
 }
 input:checked + .slider {
-  background-color: rgb(7, 201, 239);
+  background-color: #2196f3;
 }
 input:focus + .slider {
   box-shadow: 0 0 1px rgb(7, 201, 239);
@@ -359,5 +365,9 @@ input:checked + .slider:before {
 }
 .slider.round:before {
   border-radius: 50%;
+}
+
+.switch-div {
+    display: flex;
 }
 </style>

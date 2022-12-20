@@ -38,6 +38,7 @@ label {
     border-radius: 10px;
     margin: 15px;
     padding: 20px;
+    color: #fff;
 }
 i {
     margin-bottom: 5px;

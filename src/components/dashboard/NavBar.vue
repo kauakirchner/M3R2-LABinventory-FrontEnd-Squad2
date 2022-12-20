@@ -46,21 +46,21 @@ export default {
     top: 0;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #4B0082;
+    background-color: #2196f3;
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
     align-items: center;
 }
 p {
-    color: rgb(7, 201, 239);
+    color: #fff;
     font-size: 1.5em;
     margin: 0;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 span {
-    color: rgb(7, 201, 239);
+    color: #fff;
     margin-right: 10px;
 }
 .gravatar {

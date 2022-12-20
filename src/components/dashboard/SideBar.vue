@@ -1,7 +1,6 @@
 <template>
   <div class="side-bar p-2" :style="sidebar">
 
-    <!-- DEVINVENTORY LOGO -->
     <div class="sb-icon text-center">
       <img
         id="logo"
@@ -11,7 +10,6 @@
       />
     </div>
 
-    <!-- BUTTONS toggleSideBar=true-->
     <div class="btns-div" v-show="toggleSideBar">
       <SideBarButtons
         title="Geral"
@@ -60,12 +58,9 @@
       </div>
     </div>
 
-    <!-- div geral do switch -->
     <div id="switchDiv">
-      <!-- body do switch -->
       <div id="switchBody" @click="toggleSwitch">
-        <!-- Switch circle -->
-        <div id="switchCircle"></div>
+      <div id="switchCircle"></div>
       </div>
     </div>
 
@@ -78,28 +73,22 @@ import SmallIcon from "../SmallIcon.vue"
 export default {
 
   components: {
-
     SideBarButtons, 
     SmallIcon
-
-    },
+  },
   methods: {
 
-    // Hide/show sidebar
     toggleSwitch() {
 
-      // Switch circle
       let switchCircle = document.getElementById("switchCircle");
       let switchDiv = document.getElementById("switchDiv");
       let logoImg = document.getElementById("logo");
 
-      // Se não tiver classe switchCircle, adiciona
       if (switchCircle.className != "switchCircle") {
         switchCircle.className = "switchCircle";
         switchDiv.style.justifyContent = "center";
 
       } else {
-        // Se houver, apaga
         switchCircle.className = "";
         switchDiv.style.justifyContent = "right";
         logoImg.style.width = "auto";
@@ -129,11 +118,9 @@ export default {
     },
   },
   computed: {
-    // Retorna o estilo do sideBar
     sidebar() {
       return this.$store.getters["template/sidebar"];
     },
-    // Controla o sideBar e tipos de botões
     toggleSideBar() {
       return this.$store.state.template.toggleSideBar;
     }
@@ -145,19 +132,17 @@ export default {
 label {
   color: rgb(7, 201, 239);
 }
-/* Div geral do switch */
 #switchDiv {
   display: flex;
   justify-content: flex-end;
 }
-/* Corpo do switch, alinha o switch para esquerda */
 #switchBody {
   display: flex;
-  justify-content: left; /* alinha na esquerda */
-  align-items: center; /* alinha na vertical */
+  justify-content: left; 
+  align-items: center;
   width: 50px;
   height: 28px;
-  border: 1px solid rgb(7, 201, 239);
+  border: 1px solid #fff;
   border-radius: 34px;
 }
 /* Switch circle */
@@ -165,25 +150,22 @@ label {
   width: 21px;
   height: 21px;
   margin-left: 3px;
-  background-color: rgb(7, 201, 239);
+  background-color: #fff;
   border-radius: 50%;
   transition: all 0.4s;
 }
-/* Ao clicar adiciona esta classe, que move para direita */
 .switchCircle {
   margin-left: 24px !important;
 }
 
-/*Cor do ícones no sidebar*/
 #sb-fa-icon {
   color: #2196f3;
 }
 
-/*Div geral do sidebar*/
 .side-bar {
   position: sticky;
   top: 0;
-  background-color: #4B0082;
+  background-color: #2196f3;
   padding-right: 10px;
 }
 </style>

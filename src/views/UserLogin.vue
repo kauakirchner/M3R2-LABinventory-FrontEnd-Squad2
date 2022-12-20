@@ -1,100 +1,56 @@
 <template>
-    <div class="row">
-        <div class="col-7">
-            <div class="container text-center">
-                <img 
-                id="inventory-img" 
-                src="../assets/loginimg.png" 
-                alt="Inventário">
+    <main>
+        <login-form 
+            id="loginform" 
+            @submit="auth" 
+            :validation-schema="schema" 
+            v-slot="{ errors }">
+            
+            <h1>Login</h1>
+            <login-field 
+                type="email" 
+                class="form-control" 
+                name="email" 
+                v-model="user.email"
+                placeholder="E-mail"
+            />
+            <span 
+                class="text-danger" 
+                v-text="errors.email" 
+                v-show="showMailError">
+            </span>
+            <login-field 
+                type="password" 
+                class="form-control" 
+                name="password" 
+                v-model="user.password"
+                placeholder="Senha"
+            />
+            <span 
+                class="text-danger" 
+                v-text="errors.password" 
+                v-show="showPassError"
+            >
+            </span>
+            <div class="row">
+                <button type="submit" class="btn btn-primary">Entrar</button>
             </div>
-            <div class="lab365">
-                <img 
-                id="lab365-img" 
-                src="../assets/lab365logo.png" 
-                alt="LAB365">
-            </div>
-        </div>
-
-        <div class="col-5">
-            <div class="container">
-                <div class="criar-conta">
-                    <span class="text-info">Não possui uma conta?</span>
-                    <button
-                    id="create-account" 
-                    class="btn btn-outline-info" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#newAccountModal">
-                    Criar conta</button>
+            <div class="row">
+                <div>
+                    <button 
+                        class="btn btn-link link" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#newAccountModal"
+                    >
+                    Criar conta
+                    </button>
+                    <button class="btn btn-link link" @click="inProgress">Esqueceu a senha</button>
                 </div>
-                <div class="form">
-                    <h2>Login</h2>
-                    <login-form 
-                    id="loginform" 
-                    @submit="auth" 
-                    :validation-schema="schema" 
-                    v-slot="{ errors }">
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <login-field 
-                            type="email" 
-                            class="form-control" 
-                            name="email" 
-                            v-model="user.email"/>
-                            <span 
-                            class="text-danger" 
-                            v-text="errors.email" 
-                            v-show="showMailError">
-                            </span>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Senha</label>
-                            <login-field 
-                            type="password" 
-                            class="form-control" 
-                            name="password" 
-                            v-model="user.password"/>
-                            <span 
-                            class="text-danger" 
-                            v-text="errors.password" 
-                            v-show="showPassError">
-                            </span>
-                        </div>
-                        <button 
-                        class="btn btn-outline-danger" 
-                        type="button" 
-                        @click="cleanForm">
-                        Limpar
-                        </button>
-                        <button 
-                        type="submit" 
-                        class="btn btn-outline-info">
-                        Entrar
-                        </button>
-                    </login-form>
-                    <div class="alternative">
-                        <button 
-                        id="google" 
-                        class="btn btn-outline-light" 
-                        @click="enterWithGoogle">
-                        Entrar com Google
-                        </button>
-                        <p><router-link 
-                        id="forgot-link" 
-                        to="/" 
-                        @click="inProgress">
-                        Esqueceu a senha?
-                        </router-link></p>
-                    </div>
-                </div>
+                <button class="btn btn-outline-primary text-dark btn-google" id="google" @click="enterWithGoogle">G</button>
             </div>
-            <div class="logo">
-                <img 
-                id="dev-inv-img" 
-                src="../assets/InventaryLogonobg.png" 
-                alt="Devinventory logo">
-            </div>
-        </div>
-    </div>
+           
+        </login-form>
+    </main>
     <ModalNewAccount></ModalNewAccount>
 </template>
 <script>
@@ -184,80 +140,75 @@ export default {
 }
 </script>
 <style scoped>
-/* Div geral */
-.row {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    max-height: 100%;
-}
-/* Coluna da imagem grande */
-.col-7 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 150px 20px 10px 10px;
-    background-color: aliceblue;
-}
-/* Div da Coluna de login */
-.col-5 {
-    background-color: #4B0082;
-    padding-right: 40px;
-    padding-left: 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-/* Imagem grande */
-#inventory-img {
-    max-width: 450px;
-}
-/* Imagem pequena LAB365 */
-#lab365-img {
-    max-width: 90px;
-}
-/* Devinventory logo */
-#dev-inv-img {
-    max-width: 150px;
-}
-/* Div da imagem LAB365 */
-.lab365 {
-    text-align: right;
-}
-/* Botões */
 .btn {
-    margin: 4px;
-}
-/* Div do botão criar conta */
-.criar-conta {
-    text-align: right;
-    margin-bottom: 30px;
-}
-/* Div do form */
-#loginform {
-    margin-top: 40px;
-    margin-bottom: 40px;
-    padding-right: 80px;
-}
-/* Div do botão Entrar com Google e esqueceu senha? */
-.alternative {
-    display:block;
-    text-align: center;
-    padding-right:70px;
-}
-/* Div do devinvetory logo */
-.logo {
-    text-align: right;
+    border-radius: 8px;
+    padding: 10px;
     
 }
-/* Botão Entrar com Google */
-#google {
+
+.link {
+    font-size: 12px;
+}
+
+.text-blue:hover {
+    color: #2196f3;
+}
+main {
+    background-color: #c3e0f8;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 400px;
+    height: 550px;
+    background-color: rgba(255, 255, 255, 0.782);
+    border-radius: 35px;
+    box-shadow: 0px 10px 27px -6px rgba(0, 0, 0, 0.140);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    margin-bottom: 50px;
+    font-size: 36px;
+}
+
+input {
+    padding: 10px 0px 10px 15px;
+    width: 285px;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+}
+
+p {
+    font-size: 12px;
     margin-bottom: 20px;
 }
-h2, .form-label, #forgot-link {
-    color: rgb(7, 201, 239);
-    margin-bottom: 1px;
+
+div {
+    display: flex;
+    justify-content: left;
+    width: 300px;
 }
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.btn-google {
+    width: 40px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+
 </style>
